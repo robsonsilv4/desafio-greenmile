@@ -1,6 +1,7 @@
 package com.robson.desafiogreenmile.service;
 
 import com.robson.desafiogreenmile.domain.Usuario;
+import com.robson.desafiogreenmile.dto.NovoUsuarioDTO;
 import com.robson.desafiogreenmile.dto.UsuarioDTO;
 import com.robson.desafiogreenmile.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,12 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    public Usuario insert(Usuario usuario) {
+        usuario.setId(null);
+        usuario = usuarioRepository.save(usuario);
+        return usuario;
+    }
+
     public Usuario buscar(Long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         return usuario.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -29,6 +36,10 @@ public class UsuarioService {
 
     public Usuario fromDTO(UsuarioDTO usuarioDTO) {
         return new Usuario(usuarioDTO.getId(), usuarioDTO.getNome(), usuarioDTO.getEmail());
+    }
+
+    public Usuario fromDTO(NovoUsuarioDTO novoUsuarioDTO) {
+        return new Usuario(null, novoUsuarioDTO.getNome(), novoUsuarioDTO.getEmail());
     }
 
     public Usuario update(Usuario usuario) {

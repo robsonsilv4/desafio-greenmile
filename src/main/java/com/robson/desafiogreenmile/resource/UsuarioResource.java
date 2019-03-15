@@ -1,13 +1,16 @@
 package com.robson.desafiogreenmile.resource;
 
 import com.robson.desafiogreenmile.domain.Usuario;
+import com.robson.desafiogreenmile.dto.NovoUsuarioDTO;
 import com.robson.desafiogreenmile.dto.UsuarioDTO;
 import com.robson.desafiogreenmile.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +20,17 @@ public class UsuarioResource {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Void> insert(@Valid @RequestBody NovoUsuarioDTO novoUsuarioDTO) {
+        Usuario usuario = usuarioService.fromDTO(novoUsuarioDTO);
+        usuario = usuarioService.insert(usuario);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(usuario.getId())
+                .toUri();
+        return ResponseEntity.created(uri).build();
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> find(@PathVariable Long id) {
