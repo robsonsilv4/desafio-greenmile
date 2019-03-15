@@ -21,7 +21,7 @@ public class UsuarioResource {
     @Autowired
     private UsuarioService usuarioService;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody NovoUsuarioDTO novoUsuarioDTO) {
         Usuario usuario = usuarioService.fromDTO(novoUsuarioDTO);
         usuario = usuarioService.insert(usuario);
@@ -32,13 +32,13 @@ public class UsuarioResource {
         return ResponseEntity.created(uri).build();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public ResponseEntity<?> find(@PathVariable Long id) {
         Usuario usuario = usuarioService.buscar(id);
         return ResponseEntity.ok().body(usuario);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@Valid @RequestBody UsuarioDTO usuarioDTO, @PathVariable Long id) {
         Usuario usuario = usuarioService.fromDTO(usuarioDTO);
         usuario.setId(id);
@@ -46,13 +46,13 @@ public class UsuarioResource {
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         usuarioService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<List<UsuarioDTO>> findAll() {
         List<Usuario> list = usuarioService.findAll();
         List<UsuarioDTO> listDTO = list.stream().map(usuario -> new UsuarioDTO(usuario)).collect(Collectors.toList());
