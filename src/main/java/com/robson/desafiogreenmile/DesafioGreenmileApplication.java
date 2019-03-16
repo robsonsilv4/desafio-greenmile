@@ -31,10 +31,13 @@ public class DesafioGreenmileApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        Usuario usuario = new Usuario(null, "Robson", "robson@gmail.com", bCryptPasswordEncoder.encode("desafio"));
-        usuario.setPerfil(Perfil.ADMIN);
-        HoraTrabalhada horaTrabalhada = new HoraTrabalhada(null, LocalDate.parse("17/03/2019", formatoData), 6, usuario);
+        Usuario usuario1 = new Usuario(null, "Robson", "robson@gmail.com", bCryptPasswordEncoder.encode("desafio"));
+        usuario1.setPerfil(Perfil.ADMIN);
 
-        usuarioRepository.saveAll(Arrays.asList(usuario));
+        Usuario usuario2 = new Usuario(null, "Samuel", "samuel@grennmile.com", bCryptPasswordEncoder.encode("greenmile"));
+
+        HoraTrabalhada horaTrabalhada = new HoraTrabalhada(null, LocalDate.parse("17/03/2019", formatoData), 6, usuario1);
+
+        usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2));
     }
 }
