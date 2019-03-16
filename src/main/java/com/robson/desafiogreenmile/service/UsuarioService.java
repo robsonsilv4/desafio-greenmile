@@ -40,11 +40,11 @@ public class UsuarioService {
     }
 
     public Usuario fromDTO(UsuarioDTO usuarioDTO) {
-        return new Usuario(usuarioDTO.getId(), usuarioDTO.getNome(), usuarioDTO.getEmail(), null, null);
+        return new Usuario(usuarioDTO.getId(), usuarioDTO.getNome(), usuarioDTO.getEmail(), null);
     }
 
     public Usuario fromDTO(NovoUsuarioDTO novoDTO) {
-        return new Usuario(null, novoDTO.getNome(), novoDTO.getEmail(), bCryptPasswordEncoder.encode(novoDTO.getSenha()), null);
+        return new Usuario(null, novoDTO.getNome(), novoDTO.getEmail(), bCryptPasswordEncoder.encode(novoDTO.getSenha()));
     }
 
     public Usuario update(Usuario usuario) {

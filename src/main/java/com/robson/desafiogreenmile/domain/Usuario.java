@@ -1,18 +1,24 @@
 package com.robson.desafiogreenmile.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import com.robson.desafiogreenmile.domain.enumeration.Perfil;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-@AllArgsConstructor
 public class Usuario {
 
     @Id
@@ -27,6 +33,27 @@ public class Usuario {
     @JsonIgnore
     private String senha;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "PERFIS")
+    private Set<Integer> perfis = new HashSet<>();
+
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<HoraTrabalhada> horasTrabalhadas = new ArrayList<>();
+
+    public Usuario(Long id, String nome, String email, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
+
+    public Set<Perfil> getPerfis() {
+        return perfis.stream()
+                .map(x -> Perfil.toEnum(x))
+                .collect(Collectors.toSet());
+    }
+
+    public void setPerfil(Perfil perfil) {
+        perfis.add(perfil.getCodigo());
+    }
 }
