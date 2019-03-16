@@ -3,6 +3,8 @@ package com.robson.desafiogreenmile.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,4 +22,7 @@ public class Usuario {
 
     @Column(unique = true)
     private String email;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<HoraTrabalhada> horasTrabalhadas = new ArrayList<>();
 }

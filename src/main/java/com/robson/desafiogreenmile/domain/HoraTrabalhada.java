@@ -6,13 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -30,7 +26,9 @@ public class HoraTrabalhada implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate data;
 
-    private LocalTime horaInicial;
+    private Integer quantidade;
 
-    private LocalTime horaFinal;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 }
