@@ -23,8 +23,12 @@ public class HoraTrabalhadaService {
 
   public HoraTrabalhada insert(HoraTrabalhada horaTrabalhada) {
     horaTrabalhada.setId(null);
-    horaTrabalhada = horaTrabalhadaRepository.save(horaTrabalhada);
-    return horaTrabalhada;
+
+    UsuarioDetails user = UserService.authenticated();
+    Usuario usuario = usuarioService.buscar(user.getId());
+    horaTrabalhada.setUsuario(usuario);
+
+    return horaTrabalhadaRepository.save(horaTrabalhada);
   }
 
   public HoraTrabalhada find(Long id) {
