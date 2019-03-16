@@ -1,6 +1,7 @@
 package com.robson.desafiogreenmile.configuration;
 
 import com.robson.desafiogreenmile.security.JWTAuthenticationFilter;
+import com.robson.desafiogreenmile.security.JWTAuthorizationFilter;
 import com.robson.desafiogreenmile.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +26,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Autowired private JWTUtil jwtUtil;
 
-  private static final String[] PUBLIC_MATCHERS_GET = {"/usuarios/**", "/horas-trabalhadas/**"};
+  private static final String[] PUBLIC_MATCHERS_POST = {"/usuarios/**"};
+  private static final String[] PUBLIC_MATCHERS_GET = {"/horas-trabalhadas/**"};
 
   @Override
   public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -36,11 +38,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable();
     http.authorizeRequests()
+        .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST)
+        .permitAll()
         .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET)
         .permitAll()
         .anyRequest()
         .authenticated();
     http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+    http.addFilter(
+        new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
   }
 
