@@ -1,10 +1,14 @@
 package com.robson.desafiogreenmile.service;
 
 import com.robson.desafiogreenmile.domain.Usuario;
+import com.robson.desafiogreenmile.domain.enumeration.Perfil;
 import com.robson.desafiogreenmile.dto.NovoUsuarioDTO;
 import com.robson.desafiogreenmile.dto.UsuarioDTO;
+import com.robson.desafiogreenmile.exception.AuthorizationException;
 import com.robson.desafiogreenmile.exception.ObjectNotFoundException;
 import com.robson.desafiogreenmile.repository.UsuarioRepository;
+import com.robson.desafiogreenmile.security.UserService;
+import com.robson.desafiogreenmile.security.UsuarioDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,6 +32,11 @@ public class UsuarioService {
     }
 
     public Usuario buscar(Long id) {
+        UsuarioDetails user = UserService.authenticated();
+        if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado!");
+        }
+
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         return usuario.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! ID: " + id + ", Tipo: " + Usuario.class.getName()
