@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -23,9 +24,12 @@ public class HoraTrabalhada implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     @JsonFormat(pattern = "dd/MM/yyyy")
+    @NotEmpty(message = "Preenchimento obrigatório!")
     private LocalDate data;
 
+    @NotEmpty(message = "Preenchimento obrigatório!")
     private Integer quantidade;
 
     @ManyToOne

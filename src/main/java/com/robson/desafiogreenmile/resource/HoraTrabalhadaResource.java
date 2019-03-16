@@ -9,7 +9,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/horas-trabalhadas")
@@ -19,8 +18,8 @@ public class HoraTrabalhadaResource {
     private HoraTrabalhadaService horaTrabalhadaService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Optional<HoraTrabalhada>> find(@PathVariable Long id) {
-        Optional<HoraTrabalhada> horaTrabalhada = horaTrabalhadaService.find(id);
+    public ResponseEntity<HoraTrabalhada> find(@PathVariable Long id) {
+        HoraTrabalhada horaTrabalhada = horaTrabalhadaService.find(id);
         return ResponseEntity.ok().body(horaTrabalhada);
     }
 
