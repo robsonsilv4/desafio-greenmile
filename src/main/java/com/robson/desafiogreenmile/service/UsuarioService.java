@@ -6,6 +6,7 @@ import com.robson.desafiogreenmile.dto.UsuarioDTO;
 import com.robson.desafiogreenmile.exception.ObjectNotFoundException;
 import com.robson.desafiogreenmile.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Usuario insert(Usuario usuario) {
         usuario.setId(null);
@@ -36,11 +40,11 @@ public class UsuarioService {
     }
 
     public Usuario fromDTO(UsuarioDTO usuarioDTO) {
-        return new Usuario(usuarioDTO.getId(), usuarioDTO.getNome(), usuarioDTO.getEmail(), null);
+        return new Usuario(usuarioDTO.getId(), usuarioDTO.getNome(), usuarioDTO.getEmail(), null, null);
     }
 
-    public Usuario fromDTO(NovoUsuarioDTO novoUsuarioDTO) {
-        return new Usuario(null, novoUsuarioDTO.getNome(), novoUsuarioDTO.getEmail(), null);
+    public Usuario fromDTO(NovoUsuarioDTO novoDTO) {
+        return new Usuario(null, novoDTO.getNome(), novoDTO.getEmail(), bCryptPasswordEncoder.encode(novoDTO.getSenha()), null);
     }
 
     public Usuario update(Usuario usuario) {

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Getter
@@ -16,4 +17,7 @@ public class NovoUsuarioDTO implements Serializable {
     private Long id;
     private String nome;
     private String email;
+
+    @NotEmpty(message = "Preenchimento obrigatório!")
+    private String senha;
 }
