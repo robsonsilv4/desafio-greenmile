@@ -18,21 +18,21 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class HoraTrabalhada implements Serializable {
 
-    private static final long serialVersionUID = -192174945664887574L;
+  private static final long serialVersionUID = -192174945664887574L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @NotEmpty
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    @NotEmpty(message = "Preenchimento obrigatório!")
-    private LocalDate data;
+  @NotEmpty
+  @JsonFormat(pattern = "dd/MM/yyyy")
+  @NotEmpty(message = "Preenchimento obrigatório!")
+  private LocalDate data;
 
-    @NotEmpty(message = "Preenchimento obrigatório!")
-    private Integer quantidade;
+  @NotEmpty(message = "Preenchimento obrigatório!")
+  private Integer quantidade;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+  @ManyToOne
+  @JoinColumn(name = "usuario_id")
+  private Usuario usuario;
 }

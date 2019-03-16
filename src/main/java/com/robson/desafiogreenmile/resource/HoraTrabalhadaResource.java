@@ -14,22 +14,22 @@ import java.net.URI;
 @RequestMapping(value = "/horas-trabalhadas")
 public class HoraTrabalhadaResource {
 
-    @Autowired
-    private HoraTrabalhadaService horaTrabalhadaService;
+  @Autowired private HoraTrabalhadaService horaTrabalhadaService;
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<HoraTrabalhada> find(@PathVariable Long id) {
-        HoraTrabalhada horaTrabalhada = horaTrabalhadaService.find(id);
-        return ResponseEntity.ok().body(horaTrabalhada);
-    }
+  @GetMapping(value = "/{id}")
+  public ResponseEntity<HoraTrabalhada> find(@PathVariable Long id) {
+    HoraTrabalhada horaTrabalhada = horaTrabalhadaService.find(id);
+    return ResponseEntity.ok().body(horaTrabalhada);
+  }
 
-    @PostMapping
-    public ResponseEntity<Void> insert(@Valid @RequestBody HoraTrabalhada horaTrabalhada) {
-        horaTrabalhada = horaTrabalhadaService.insert(horaTrabalhada);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(horaTrabalhada.getId())
-                .toUri();
-        return ResponseEntity.created(uri).build();
-    }
+  @PostMapping
+  public ResponseEntity<Void> insert(@Valid @RequestBody HoraTrabalhada horaTrabalhada) {
+    horaTrabalhada = horaTrabalhadaService.insert(horaTrabalhada);
+    URI uri =
+        ServletUriComponentsBuilder.fromCurrentRequest()
+            .path("/{id}")
+            .buildAndExpand(horaTrabalhada.getId())
+            .toUri();
+    return ResponseEntity.created(uri).build();
+  }
 }

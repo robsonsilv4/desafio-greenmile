@@ -11,8 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @TestPropertySource("classpath:application.properties")
 public class DesafioGreenmileApplicationTests {
 
-    @Test
-    public void contextLoads() {
-    }
-
+  @Test
+  public void contextLoads() {}
 }

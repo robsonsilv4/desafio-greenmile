@@ -12,12 +12,12 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class NovoUsuarioDTO implements Serializable {
 
-    private static final long serialVersionUID = 4224057337516317769L;
+  private static final long serialVersionUID = 4224057337516317769L;
 
-    private Long id;
-    private String nome;
-    private String email;
+  private Long id;
+  private String nome;
+  private String email;
 
-    @NotEmpty(message = "Preenchimento obrigatório!")
-    private String senha;
+  @NotEmpty(message = "Preenchimento obrigatório!")
+  private String senha;
 }

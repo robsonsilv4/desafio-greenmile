@@ -18,21 +18,21 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class UsuarioDTO implements Serializable {
 
-    private static final long serialVersionUID = 3537283637312947563L;
+  private static final long serialVersionUID = 3537283637312947563L;
 
-    private Long id;
+  private Long id;
 
-    @Length
-    @NotEmpty(message = "Preenchimento obrigatório!")
-    private String nome;
+  @Length
+  @NotEmpty(message = "Preenchimento obrigatório!")
+  private String nome;
 
-    @Email
-    @NotEmpty(message = "Email inválido!")
-    private String email;
+  @Email
+  @NotEmpty(message = "Email inválido!")
+  private String email;
 
-    public UsuarioDTO(@NotNull Usuario usuario) {
-        id = usuario.getId();
-        nome = usuario.getNome();
-        email = usuario.getEmail();
-    }
+  public UsuarioDTO(@NotNull Usuario usuario) {
+    id = usuario.getId();
+    nome = usuario.getNome();
+    email = usuario.getEmail();
+  }
 }
