@@ -34,6 +34,7 @@ public class Usuario {
   @CollectionTable(name = "PERFIS")
   private Set<Integer> perfis = new HashSet<>();
 
+  @JsonIgnore
   @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
   private List<HoraTrabalhada> horasTrabalhadas = new ArrayList<>();
 
