@@ -1,4 +1,4 @@
-package com.robson.desafiogreenmile.dto.command;
+package com.robson.desafiogreenmile.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class NovoUsuarioCommandDTO implements Serializable {
+public class NovoUsuarioDTO implements Serializable {
 
   private static final long serialVersionUID = 916643947514327981L;
 

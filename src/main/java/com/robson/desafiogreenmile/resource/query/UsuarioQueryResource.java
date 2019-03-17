@@ -1,7 +1,7 @@
 package com.robson.desafiogreenmile.resource.query;
 
 import com.robson.desafiogreenmile.domain.Usuario;
-import com.robson.desafiogreenmile.dto.command.UsuarioCommandDTO;
+import com.robson.desafiogreenmile.dto.UsuarioDTO;
 import com.robson.desafiogreenmile.service.query.UsuarioQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,13 +23,13 @@ public class UsuarioQueryResource {
 
   @GetMapping
   @PreAuthorize("hasAnyRole('ADMIN')")
-  public ResponseEntity<Page<UsuarioCommandDTO>> findAll(
+  public ResponseEntity<Page<UsuarioDTO>> findAll(
       @RequestParam(value = "page", defaultValue = "0") Integer page,
       @RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
       @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
       @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
     Page<Usuario> list = usuarioService.findAll(page, linesPerPage, orderBy, direction);
-    Page<UsuarioCommandDTO> listDTO = list.map(obj -> new UsuarioCommandDTO(obj));
+    Page<UsuarioDTO> listDTO = list.map(obj -> new UsuarioDTO(obj));
     return ResponseEntity.ok().body(listDTO);
   }
 }

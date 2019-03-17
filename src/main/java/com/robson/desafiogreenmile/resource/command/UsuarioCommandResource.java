@@ -1,8 +1,8 @@
 package com.robson.desafiogreenmile.resource.command;
 
 import com.robson.desafiogreenmile.domain.Usuario;
-import com.robson.desafiogreenmile.dto.command.NovoUsuarioCommandDTO;
-import com.robson.desafiogreenmile.dto.command.UsuarioCommandDTO;
+import com.robson.desafiogreenmile.dto.NovoUsuarioDTO;
+import com.robson.desafiogreenmile.dto.UsuarioDTO;
 import com.robson.desafiogreenmile.service.command.UsuarioCommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class UsuarioCommandResource {
   @Autowired private UsuarioCommandService usuarioService;
 
   @PostMapping
-  public ResponseEntity<Void> insert(@Valid @RequestBody NovoUsuarioCommandDTO novoUsuarioDTO) {
+  public ResponseEntity<Void> insert(@Valid @RequestBody NovoUsuarioDTO novoUsuarioDTO) {
     Usuario usuario = usuarioService.fromDTO(novoUsuarioDTO);
     usuario = usuarioService.insert(usuario);
     URI uri =
@@ -32,7 +32,7 @@ public class UsuarioCommandResource {
 
   @PutMapping(value = "/{id}")
   public ResponseEntity<Void> update(
-          @Valid @RequestBody UsuarioCommandDTO usuarioDTO, @PathVariable Long id) {
+          @Valid @RequestBody UsuarioDTO usuarioDTO, @PathVariable Long id) {
     Usuario usuario = usuarioService.fromDTO(usuarioDTO);
     usuario.setId(id);
     usuario = usuarioService.update(usuario);
