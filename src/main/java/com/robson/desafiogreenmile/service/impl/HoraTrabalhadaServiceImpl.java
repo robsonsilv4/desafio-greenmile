@@ -9,6 +9,7 @@ import com.robson.desafiogreenmile.security.UserService;
 import com.robson.desafiogreenmile.security.UsuarioDetails;
 import com.robson.desafiogreenmile.service.HoraTrabalhadaService;
 import com.robson.desafiogreenmile.service.UsuarioService;
+import com.robson.desafiogreenmile.service.query.UsuarioQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +24,7 @@ import java.util.Optional;
 public class HoraTrabalhadaServiceImpl implements HoraTrabalhadaService {
 
   @Autowired private HoraTrabalhadaRepository horaTrabalhadaRepository;
-  @Autowired private UsuarioService usuarioService;
+  @Autowired private UsuarioQueryService usuarioService;
 
   public HoraTrabalhada insert(HoraTrabalhada horaTrabalhada) {
     horaTrabalhada.setId(null);

@@ -1,11 +1,10 @@
-package com.robson.desafiogreenmile.dto;
+package com.robson.desafiogreenmile.dto.command;
 
 import com.robson.desafiogreenmile.domain.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -16,13 +15,12 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioDTO implements Serializable {
+public class UsuarioCommandDTO implements Serializable {
 
   private static final long serialVersionUID = 3537283637312947563L;
 
   private Long id;
 
-  @Length
   @NotEmpty(message = "Preenchimento obrigatório!")
   private String nome;
 
@@ -30,7 +28,7 @@ public class UsuarioDTO implements Serializable {
   @NotEmpty(message = "Email inválido!")
   private String email;
 
-  public UsuarioDTO(@NotNull Usuario usuario) {
+  public UsuarioCommandDTO(@NotNull Usuario usuario) {
     id = usuario.getId();
     nome = usuario.getNome();
     email = usuario.getEmail();
