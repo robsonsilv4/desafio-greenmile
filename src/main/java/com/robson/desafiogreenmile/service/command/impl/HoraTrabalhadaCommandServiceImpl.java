@@ -8,6 +8,7 @@ import com.robson.desafiogreenmile.security.UsuarioDetails;
 import com.robson.desafiogreenmile.service.command.HoraTrabalhadaCommandService;
 import com.robson.desafiogreenmile.service.query.UsuarioQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ public class HoraTrabalhadaCommandServiceImpl implements HoraTrabalhadaCommandSe
   @Autowired private HoraTrabalhadaRepository horaTrabalhadaRepository;
   @Autowired private UsuarioQueryService usuarioQuery;
 
+  @CachePut
   @Override
   public HoraTrabalhada insert(HoraTrabalhada horaTrabalhada) {
     horaTrabalhada.setId(null);

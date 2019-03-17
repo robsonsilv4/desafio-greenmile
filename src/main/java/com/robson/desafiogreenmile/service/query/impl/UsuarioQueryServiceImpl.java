@@ -9,9 +9,12 @@ import com.robson.desafiogreenmile.security.UserService;
 import com.robson.desafiogreenmile.security.UsuarioDetails;
 import com.robson.desafiogreenmile.service.query.UsuarioQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,7 +37,11 @@ public class UsuarioQueryServiceImpl implements UsuarioQueryService {
   }
 
   @Override
-  public List<Usuario> findAll() {
-    return usuarioRepository.findAll();
+  @Cacheable(value = "usuarios")
+  public Page<Usuario> findAll(
+      Integer page, Integer linesPerPage, String orderBy, String direction) {
+    PageRequest pageRequest =
+        PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+    return usuarioRepository.findAll(pageRequest);
   }
 }
