@@ -1,4 +1,4 @@
-package com.robson.desafiogreenmile.resource;
+package com.robson.desafiogreenmile.resource.command;
 
 import com.robson.desafiogreenmile.security.JWTUtil;
 import com.robson.desafiogreenmile.security.UserService;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping(value = "/auth")
-public class AuthResource {
+public class AuthCommandResource {
 
   @Autowired private JWTUtil jwtUtil;
 

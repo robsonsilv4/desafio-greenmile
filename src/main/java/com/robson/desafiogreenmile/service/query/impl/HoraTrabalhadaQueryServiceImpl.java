@@ -1,4 +1,4 @@
-package com.robson.desafiogreenmile.service.impl;
+package com.robson.desafiogreenmile.service.query.impl;
 
 import com.robson.desafiogreenmile.domain.HoraTrabalhada;
 import com.robson.desafiogreenmile.domain.Usuario;
@@ -7,8 +7,7 @@ import com.robson.desafiogreenmile.exception.ObjectNotFoundException;
 import com.robson.desafiogreenmile.repository.HoraTrabalhadaRepository;
 import com.robson.desafiogreenmile.security.UserService;
 import com.robson.desafiogreenmile.security.UsuarioDetails;
-import com.robson.desafiogreenmile.service.HoraTrabalhadaService;
-import com.robson.desafiogreenmile.service.UsuarioService;
+import com.robson.desafiogreenmile.service.query.HoraTrabalhadaQueryService;
 import com.robson.desafiogreenmile.service.query.UsuarioQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,20 +20,10 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class HoraTrabalhadaServiceImpl implements HoraTrabalhadaService {
+public class HoraTrabalhadaQueryServiceImpl implements HoraTrabalhadaQueryService {
 
   @Autowired private HoraTrabalhadaRepository horaTrabalhadaRepository;
-  @Autowired private UsuarioQueryService usuarioService;
-
-  public HoraTrabalhada insert(HoraTrabalhada horaTrabalhada) {
-    horaTrabalhada.setId(null);
-
-    UsuarioDetails user = UserService.authenticated();
-    Usuario usuario = usuarioService.find(user.getId());
-    horaTrabalhada.setUsuario(usuario);
-
-    return horaTrabalhadaRepository.save(horaTrabalhada);
-  }
+  @Autowired private UsuarioQueryService usuarioQuery;
 
   public HoraTrabalhada find(Long id) {
     Optional<HoraTrabalhada> horaTrabalhada = horaTrabalhadaRepository.findById(id);
@@ -54,7 +43,7 @@ public class HoraTrabalhadaServiceImpl implements HoraTrabalhadaService {
 
     PageRequest pageRequest =
         PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-    Usuario usuario = usuarioService.find(user.getId());
+    Usuario usuario = usuarioQuery.find(user.getId());
 
     return horaTrabalhadaRepository.findByUsuario(usuario, pageRequest);
   }

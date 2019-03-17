@@ -30,7 +30,6 @@ public class HoraTrabalhada implements Serializable {
 
   // TODO: 16/03/19
   // Dividir quantidade em horas e minutos
-  @Column(columnDefinition = "default 0")
   private Integer quantidade;
 
   @ManyToOne

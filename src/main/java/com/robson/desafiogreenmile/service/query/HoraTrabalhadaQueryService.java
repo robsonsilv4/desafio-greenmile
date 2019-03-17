@@ -1,10 +1,9 @@
-package com.robson.desafiogreenmile.service;
+package com.robson.desafiogreenmile.service.query;
 
 import com.robson.desafiogreenmile.domain.HoraTrabalhada;
 import org.springframework.data.domain.Page;
 
-public interface HoraTrabalhadaService {
-  HoraTrabalhada insert(HoraTrabalhada horaTrabalhada);
+public interface HoraTrabalhadaQueryService {
 
   HoraTrabalhada find(Long id);
 
