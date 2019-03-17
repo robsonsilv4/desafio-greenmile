@@ -28,7 +28,9 @@ public class HoraTrabalhada implements Serializable {
   @Column(unique = true, nullable = false)
   private LocalDate data;
 
-  @NotNull(message = "Preenchimento obrigatório!")
+  // TODO: 16/03/19
+  // Dividir quantidade em horas e minutos
+  @Column(columnDefinition = "default 0")
   private Integer quantidade;
 
   @ManyToOne
