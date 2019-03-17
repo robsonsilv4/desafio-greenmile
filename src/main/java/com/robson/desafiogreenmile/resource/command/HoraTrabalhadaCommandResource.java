@@ -19,7 +19,9 @@ public class HoraTrabalhadaCommandResource {
 
   @Autowired private HoraTrabalhadaCommandService horaTrabalhadaCommand;
 
-  @PostMapping
+  @PostMapping(
+      consumes = "application/json",
+      headers = "content-type=application/x-www-form-urlencoded")
   public ResponseEntity<Void> insert(@Valid @RequestBody HoraTrabalhada horaTrabalhada) {
     horaTrabalhada = horaTrabalhadaCommand.insert(horaTrabalhada);
     URI uri =

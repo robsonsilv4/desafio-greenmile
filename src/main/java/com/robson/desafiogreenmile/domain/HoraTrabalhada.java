@@ -10,12 +10,11 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class HoraTrabalhada implements Serializable {
 
   private static final long serialVersionUID = -192174945664887574L;
@@ -28,12 +27,16 @@ public class HoraTrabalhada implements Serializable {
   @Column(unique = true, nullable = false)
   private LocalDate data;
 
-  // TODO: 16/03/19
-  // Dividir quantidade em horas e minutos
-  private Integer quantidade;
+  @JsonFormat(pattern = "HH:mm")
+  private LocalTime horaEntrada;
+
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+  private LocalTime horaSaida;
+
+  private Long horasTrabalhadas;
 
   @ManyToOne
-  @JsonManagedReference
+  //  @JsonManagedReference
   @JoinColumn(name = "usuario_id")
   private Usuario usuario;
 }

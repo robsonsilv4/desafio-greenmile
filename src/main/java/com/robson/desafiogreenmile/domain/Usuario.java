@@ -38,7 +38,8 @@ public class Usuario implements Serializable {
   @CollectionTable(name = "PERFIS")
   private Set<Integer> perfis = new HashSet<>();
 
-  @JsonBackReference
+  //  @JsonBackReference
+  @JsonIgnore
   @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
   private List<HoraTrabalhada> horasTrabalhadas = new ArrayList<>();
 

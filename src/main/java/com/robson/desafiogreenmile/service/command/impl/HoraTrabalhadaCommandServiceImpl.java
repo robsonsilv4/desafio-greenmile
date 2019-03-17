@@ -8,30 +8,28 @@ import com.robson.desafiogreenmile.security.UsuarioDetails;
 import com.robson.desafiogreenmile.service.command.HoraTrabalhadaCommandService;
 import com.robson.desafiogreenmile.service.query.UsuarioQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.Duration;
 
 @Service
 @Transactional
 public class HoraTrabalhadaCommandServiceImpl implements HoraTrabalhadaCommandService {
 
   @Autowired private HoraTrabalhadaRepository horaTrabalhadaRepository;
-  @Autowired private UsuarioQueryService usuarioQuery;
+  @Autowired private UsuarioQueryService usuarioService;
 
-  @CachePut
+  //  @CachePut
   @Override
   public HoraTrabalhada insert(HoraTrabalhada horaTrabalhada) {
     horaTrabalhada.setId(null);
+    horaTrabalhada.setHorasTrabalhadas(
+        Duration.between(horaTrabalhada.getHoraEntrada(), horaTrabalhada.getHoraSaida()).toHours());
 
     UsuarioDetails user = UserService.authenticated();
-    Usuario usuario = usuarioQuery.find(user.getId());
+    Usuario usuario = usuarioService.find(user.getId());
     horaTrabalhada.setUsuario(usuario);
-
-    // Define a quantidade padrão, se o atributo for nulo.
-    if (horaTrabalhada.getQuantidade() == null) {
-      horaTrabalhada.setQuantidade(0);
-    }
 
     return horaTrabalhadaRepository.save(horaTrabalhada);
   }
