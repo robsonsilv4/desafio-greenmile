@@ -1,4 +1,4 @@
-package com.robson.desafiogreenmile.service;
+package com.robson.desafiogreenmile.service.impl;
 
 import com.robson.desafiogreenmile.domain.Usuario;
 import com.robson.desafiogreenmile.repository.UsuarioRepository;
