@@ -1,10 +1,7 @@
 package com.robson.desafiogreenmile.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -36,7 +33,6 @@ public class HoraTrabalhada implements Serializable {
   private Long horasTrabalhadas;
 
   @ManyToOne
-  //  @JsonManagedReference
   @JoinColumn(name = "usuario_id")
   private Usuario usuario;
 }

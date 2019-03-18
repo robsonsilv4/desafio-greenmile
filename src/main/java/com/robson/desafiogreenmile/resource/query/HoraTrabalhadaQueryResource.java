@@ -6,10 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import javax.validation.Valid;
-import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/horas")
@@ -29,8 +25,7 @@ public class HoraTrabalhadaQueryResource {
       @RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
       @RequestParam(value = "orderBy", defaultValue = "data") String orderBy,
       @RequestParam(value = "direction", defaultValue = "DESC") String direction) {
-    Page<HoraTrabalhada> list =
-        horaTrabalhadaQuery.findAll(page, linesPerPage, orderBy, direction);
+    Page<HoraTrabalhada> list = horaTrabalhadaQuery.findAll(page, linesPerPage, orderBy, direction);
     return ResponseEntity.ok().body(list);
   }
 }
