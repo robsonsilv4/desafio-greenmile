@@ -3,6 +3,7 @@ package com.robson.desafiogreenmile.resource.command;
 import com.robson.desafiogreenmile.security.JWTUtil;
 import com.robson.desafiogreenmile.security.UserService;
 import com.robson.desafiogreenmile.security.UsuarioDetails;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping(value = "/auth")
+@Api(
+    value = "Autenticação - Token",
+    tags = "Autenticação - Token",
+    description = "Gera um novo token para o usuário.")
 public class AuthCommandResource {
 
   @Autowired private JWTUtil jwtUtil;

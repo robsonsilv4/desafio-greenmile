@@ -18,7 +18,10 @@ import java.net.URI;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(value = "/usuarios")
-@Api(value = "Usuários - Comandos", description = "Cadastro de Usuários")
+@Api(
+    value = "Usuários - Comandos",
+    tags = "Usuários - Comandos",
+    description = "Cadastro, alteração e deleção de usuários.")
 public class UsuarioCommandResource {
   @Autowired private UsuarioCommandService usuarioService;
 
