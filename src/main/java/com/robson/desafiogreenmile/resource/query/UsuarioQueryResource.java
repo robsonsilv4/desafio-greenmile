@@ -6,7 +6,6 @@ import com.robson.desafiogreenmile.service.query.UsuarioQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,8 +20,11 @@ public class UsuarioQueryResource {
     return ResponseEntity.ok().body(usuario);
   }
 
+  // Utilizar @PreAuthorize caso o usuário não possa listar os outros usuários,
+  // mas como foi requisitado, as requests de leitura devem ser públicas.
+  // Exemplo:
+  //  @PreAuthorize("hasAnyRole('ADMIN')")
   @GetMapping
-  @PreAuthorize("hasAnyRole('ADMIN')")
   public ResponseEntity<Page<UsuarioDTO>> findAll(
       @RequestParam(value = "page", defaultValue = "0") Integer page,
       @RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
