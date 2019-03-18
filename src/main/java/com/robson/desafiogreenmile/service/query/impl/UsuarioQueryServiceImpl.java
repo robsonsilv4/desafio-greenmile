@@ -24,10 +24,11 @@ public class UsuarioQueryServiceImpl implements UsuarioQueryService {
 
   @Override
   public Usuario find(Long id) {
-    UsuarioDetails user = UserService.authenticated();
-    if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
-      throw new AuthorizationException("Acesso negado!");
-    }
+    //  Implementação para garantir que o usuário só recupere ele mesmo.
+    //  UsuarioDetails user = UserService.authenticated();
+    //    if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+    //      throw new AuthorizationException("Acesso negado!");
+    //  }
 
     Optional<Usuario> usuario = usuarioRepository.findById(id);
     return usuario.orElseThrow(
