@@ -1,8 +1,7 @@
 package com.robson.desafiogreenmile.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +11,8 @@ import java.time.LocalTime;
 @Entity
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class WorkedHours implements Serializable {
 
   private static final long serialVersionUID = -192174945664887574L;

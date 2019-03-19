@@ -2,9 +2,7 @@ package com.robson.desafiogreenmile.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.robson.desafiogreenmile.domain.enumeration.Profile;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,7 +15,8 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Employee implements Serializable {
 
   private static final long serialVersionUID = 6269313493164561869L;
@@ -35,6 +34,7 @@ public class Employee implements Serializable {
 
   @ElementCollection(fetch = FetchType.EAGER)
   @CollectionTable(name = "profiles")
+  @JsonIgnore
   private Set<Integer> profiles = new HashSet<>();
 
   @JsonIgnore

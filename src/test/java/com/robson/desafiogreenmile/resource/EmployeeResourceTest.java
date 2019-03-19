@@ -53,7 +53,7 @@ public class EmployeeResourceTest {
             post("/usuarios")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(
-                    "{\"nome\":\"Robson\",\"email\":\"robson@greenmile.com\",\"senha\":\"desafio\"}"))
+                    "{\"name\":\"Robson\",\"email\":\"robson@greenmile.com\",\"password\":\"desafio\"}"))
         .andExpect(status().isCreated());
   }
 
@@ -63,14 +63,14 @@ public class EmployeeResourceTest {
         .perform(
             post("/login")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"email\":\"robson@gmail.com\", \"senha\":\"greenmile\"}"))
+                .content("{\"email\":\"robson@gmail.com\", \"password\":\"greenmile\"}"))
         .andExpect(status().isOk())
         .andReturn();
   }
 
   @Test
   public void negaLogin() throws Exception {
-    login("{\"email\":\"samuel@greenmile.com\", \"senha\":\"greenmile\"}")
+    login("{\"email\":\"samuel@greenmile.com\", \"password\":\"greenmile\"}")
         .andExpect(status().isUnauthorized());
   }
 

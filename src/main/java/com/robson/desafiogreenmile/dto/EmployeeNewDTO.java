@@ -13,7 +13,7 @@ public class EmployeeNewDTO implements Serializable {
 
   private static final long serialVersionUID = 916643947514327981L;
 
-  private String nome;
+  private String name;
   private String email;
-  private String senha;
+  private String password;
 }

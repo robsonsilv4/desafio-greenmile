@@ -20,7 +20,7 @@ public class EmployeeDTO implements Serializable {
   private Long id;
 
   @NotEmpty(message = "Preenchimento obrigatório!")
-  private String nome;
+  private String name;
 
   @Email
   @NotEmpty(message = "Email inválido!")
@@ -28,7 +28,7 @@ public class EmployeeDTO implements Serializable {
 
   public EmployeeDTO(@NotNull Employee employee) {
     id = employee.getId();
-    nome = employee.getName();
+    name = employee.getName();
     email = employee.getEmail();
   }
 }

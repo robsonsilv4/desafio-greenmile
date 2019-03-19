@@ -1,10 +1,10 @@
 package com.robson.desafiogreenmile.service.command.impl;
 
-import com.robson.desafiogreenmile.domain.WorkedHours;
 import com.robson.desafiogreenmile.domain.Employee;
+import com.robson.desafiogreenmile.domain.WorkedHours;
 import com.robson.desafiogreenmile.repository.WorkedHoursRepository;
-import com.robson.desafiogreenmile.security.UserService;
 import com.robson.desafiogreenmile.security.UserSecurityDetails;
+import com.robson.desafiogreenmile.security.UserService;
 import com.robson.desafiogreenmile.service.command.WorkedHoursCommandService;
 import com.robson.desafiogreenmile.service.query.EmployeeQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +18,8 @@ import java.time.Duration;
 public class WorkedHoursCommandServiceImpl implements WorkedHoursCommandService {
 
   @Autowired private WorkedHoursRepository workedHoursRepository;
-  @Autowired private EmployeeQueryService usuarioService;
+  @Autowired private EmployeeQueryService employeeService;
 
-  //  @CachePut
   @Override
   public WorkedHours insert(WorkedHours workedHours) {
     workedHours.setId(null);
@@ -28,7 +27,7 @@ public class WorkedHoursCommandServiceImpl implements WorkedHoursCommandService 
         Duration.between(workedHours.getInitialTime(), workedHours.getFinalTime()).toHours());
 
     UserSecurityDetails user = UserService.authenticated();
-    Employee employee = usuarioService.find(user.getId());
+    Employee employee = employeeService.find(user.getId());
     workedHours.setEmployee(employee);
 
     return workedHoursRepository.save(workedHours);

@@ -36,7 +36,7 @@ public class ResourceExceptionHandler {
         new StandardError(
             System.currentTimeMillis(),
             HttpStatus.BAD_REQUEST.value(),
-            "Integridade de dados",
+            "Integridade de dados!",
             e.getMessage(),
             request.getRequestURI());
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);

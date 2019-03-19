@@ -14,5 +14,5 @@ public interface EmployeeCommandService {
   // Métodos auxiliares
   Employee fromDTO(EmployeeDTO employeeDTO);
 
-  Employee fromDTO(EmployeeNewDTO novoDTO);
+  Employee fromDTO(EmployeeNewDTO newDTO);
 }

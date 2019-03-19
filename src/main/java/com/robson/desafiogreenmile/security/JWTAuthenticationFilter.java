@@ -38,7 +38,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
       UsernamePasswordAuthenticationToken authToken =
           new UsernamePasswordAuthenticationToken(
-              credenciais.getEmail(), credenciais.getSenha(), new ArrayList<>());
+              credenciais.getEmail(), credenciais.getPassword(), new ArrayList<>());
 
       Authentication auth = authenticationManager.authenticate(authToken);
       return auth;
@@ -75,7 +75,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
           + ", "
           + "\"status\": 401, "
           + "\"error\": \"Não autorizado\", "
-          + "\"message\": \"Email ou senha inválidos\", "
+          + "\"message\": \"Email ou password inválidos\", "
           + "\"path\": \"/login\"}";
     }
   }

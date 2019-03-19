@@ -1,8 +1,8 @@
 package com.robson.desafiogreenmile.service.command.impl;
 
 import com.robson.desafiogreenmile.domain.Employee;
-import com.robson.desafiogreenmile.dto.EmployeeNewDTO;
 import com.robson.desafiogreenmile.dto.EmployeeDTO;
+import com.robson.desafiogreenmile.dto.EmployeeNewDTO;
 import com.robson.desafiogreenmile.repository.EmployeeRepository;
 import com.robson.desafiogreenmile.service.command.EmployeeCommandService;
 import com.robson.desafiogreenmile.service.query.EmployeeQueryService;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmployeeCommandServiceImpl implements EmployeeCommandService {
 
   @Autowired private EmployeeRepository employeeRepository;
-  @Autowired private EmployeeQueryService usuarioQuery;
+  @Autowired private EmployeeQueryService employeeService;
   @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Override
@@ -28,32 +28,31 @@ public class EmployeeCommandServiceImpl implements EmployeeCommandService {
 
   @Override
   public Employee update(Employee employee) {
-    Employee novoEmployee = usuarioQuery.find(employee.getId());
-    updateData(novoEmployee, employee);
-    return employeeRepository.save(novoEmployee);
+    Employee newEmployee = employeeService.find(employee.getId());
+    updateData(newEmployee, employee);
+    return employeeRepository.save(newEmployee);
   }
 
   @Override
   public void delete(Long id) {
-    usuarioQuery.find(id);
+    employeeService.find(id);
     employeeRepository.deleteById(id);
   }
 
-  // Métodos auxiliares
-  public void updateData(Employee novoEmployee, Employee employee) {
-    novoEmployee.setName(employee.getName());
-    novoEmployee.setEmail(employee.getEmail());
+  public void updateData(Employee newEmployee, Employee employee) {
+    newEmployee.setName(employee.getName());
+    newEmployee.setEmail(employee.getEmail());
   }
 
   public Employee fromDTO(EmployeeDTO employeeDTO) {
-    return new Employee(employeeDTO.getId(), employeeDTO.getNome(), employeeDTO.getEmail(), null);
+    return new Employee(employeeDTO.getId(), employeeDTO.getName(), employeeDTO.getEmail(), null);
   }
 
-  public Employee fromDTO(EmployeeNewDTO novoDTO) {
+  public Employee fromDTO(EmployeeNewDTO newDTO) {
     return new Employee(
         null,
-        novoDTO.getNome(),
-        novoDTO.getEmail(),
-        bCryptPasswordEncoder.encode(novoDTO.getSenha()));
+        newDTO.getName(),
+        newDTO.getEmail(),
+        bCryptPasswordEncoder.encode(newDTO.getPassword()));
   }
 }
