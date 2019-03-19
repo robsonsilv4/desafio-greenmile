@@ -2,8 +2,8 @@ package com.robson.auth.filters;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.robson.auth.filters.utils.JWTUtil;
-import com.robson.core.dtos.CredentialsDTO;
 import com.robson.auth.security.UserSecurityDetails;
+import com.robson.core.dtos.CredentialsDTO;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -34,12 +34,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
   public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res)
       throws AuthenticationException {
     try {
-      CredentialsDTO credenciais =
+      CredentialsDTO credentials =
           new ObjectMapper().readValue(req.getInputStream(), CredentialsDTO.class);
 
       UsernamePasswordAuthenticationToken authToken =
           new UsernamePasswordAuthenticationToken(
-              credenciais.getEmail(), credenciais.getPassword(), new ArrayList<>());
+              credentials.getUsername(), credentials.getPassword(), new ArrayList<>());
 
       Authentication auth = authenticationManager.authenticate(authToken);
       return auth;
@@ -76,7 +76,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
           + ", "
           + "\"status\": 401, "
           + "\"error\": \"Não autorizado\", "
-          + "\"message\": \"Email ou password inválidos\", "
+          + "\"message\": \"Nome de usuário ou senha inválidos\", "
           + "\"path\": \"/login\"}";
     }
   }

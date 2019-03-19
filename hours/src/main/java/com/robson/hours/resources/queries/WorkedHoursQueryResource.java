@@ -1,7 +1,7 @@
 package com.robson.hours.resources.queries;
 
 import com.robson.core.domains.WorkedHours;
-import com.robson.hours.services.queries.WorkedHoursQueryService;
+import com.robson.hours.services.queries.HoursQueryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
     description = "Consultas de horas trabalhadas.")
 public class WorkedHoursQueryResource {
 
-  private final WorkedHoursQueryService workedHoursService;
+  private final HoursQueryService workedHoursService;
 
   @GetMapping(value = "/{id}")
   @ApiOperation(value = "Busca por um determinado registro de horas trabalhadas.")

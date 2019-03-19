@@ -4,7 +4,7 @@ import com.robson.core.domains.WorkedHours;
 import com.robson.core.repositories.WorkedHoursRepository;
 import com.robson.hours.exceptions.ObjectNotFoundException;
 import com.robson.hours.services.queries.EmployeeQueryService;
-import com.robson.hours.services.queries.WorkedHoursQueryService;
+import com.robson.hours.services.queries.HoursQueryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import java.util.Optional;
 @Transactional
 @CacheConfig(cacheNames = {"hours"})
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class WorkedHoursQueryServiceImpl implements WorkedHoursQueryService {
+public class HoursQueryServiceImpl implements HoursQueryService {
 
   private final WorkedHoursRepository workedHoursRepository;
   private final EmployeeQueryService employeeService;

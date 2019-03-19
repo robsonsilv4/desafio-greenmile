@@ -6,23 +6,25 @@ import com.robson.core.dtos.EmployeeNewDTO;
 import com.robson.core.repositories.EmployeeRepository;
 import com.robson.hours.services.commands.EmployeeCommandService;
 import com.robson.hours.services.queries.EmployeeQueryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EmployeeCommandServiceImpl implements EmployeeCommandService {
 
-  @Autowired private EmployeeRepository employeeRepository;
-  @Autowired private EmployeeQueryService employeeService;
-  //  @Autowired private BCryptPasswordEncoder passwordEncoder;
+  private final EmployeeRepository employeeRepository;
+  private final EmployeeQueryService employeeService;
+  // private final BCryptPasswordEncoder passwordEncoder;
 
   @Override
   public Employee insert(Employee employee) {
     employee.setId(null);
-    employee = employeeRepository.save(employee);
-    return employee;
+    // employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+    return employeeRepository.save(employee);
   }
 
   @Override
@@ -39,15 +41,14 @@ public class EmployeeCommandServiceImpl implements EmployeeCommandService {
   }
 
   public void updateData(Employee newEmployee, Employee employee) {
-    newEmployee.setName(employee.getName());
-    newEmployee.setEmail(employee.getEmail());
+    newEmployee.setUsername(employee.getUsername());
   }
 
   public Employee fromDTO(EmployeeDTO employeeDTO) {
-    return new Employee(employeeDTO.getId(), employeeDTO.getName(), employeeDTO.getEmail(), null);
+    return new Employee(employeeDTO.getId(), employeeDTO.getUsername(), null);
   }
 
   public Employee fromDTO(EmployeeNewDTO newDTO) {
-    return new Employee(null, newDTO.getName(), newDTO.getEmail(), newDTO.getPassword());
+    return new Employee(null, newDTO.getUsername(), newDTO.getPassword());
   }
 }

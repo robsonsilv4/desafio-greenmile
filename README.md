@@ -21,7 +21,7 @@ curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{
     "nome": "Robson",
-    "email": "robson@greenmile.com",
+    "username": "robson@greenmile.com",
     "senha": "desafio"
 }'
 ```
@@ -37,13 +37,13 @@ location: http://localhost:8082/usuarios/2
 
 ### Consultas de usuários
 
-Para poder realizar o login, onde o email e senha devem pertencer a usuário já cadastradao anteriormente, utilize o seguinte comando:
+Para poder realizar o login, onde o username e senha devem pertencer a usuário já cadastradao anteriormente, utilize o seguinte comando:
 ```sh
 curl -X POST \
   http://localhost:8082/api/login \
   -H 'Content-Type: application/json' \
   -d '{
-    "email": "robson@greenmile.com",
+    "username": "robson@greenmile.com",
     "senha": "desafio"
 }'
 ```
@@ -70,17 +70,17 @@ Será retornada uma lista páginada com todos os registros de usuários:
     {
       "id": 1,
       "name": "Robson",
-      "email": "robson@greenmile.com"
+      "username": "robson@greenmile.com"
     },
     {
       "id": 2,
       "name": "Samuel",
-      "email": "samuel@greenmile.com"
+      "username": "samuel@greenmile.com"
     },
     {
       "id": 3,
       "name": "Gabriel",
-      "email": "gabriel@greenmile.com"
+      "username": "gabriel@greenmile.com"
     },
 
     # ...
@@ -129,7 +129,7 @@ Será retornado as informações relacionadas ao usuário com id equivalente ao 
 {
   "id": 1,
   "name": "Robson",
-  "email": "robson@greenmile.com",
+  "username": "robson@greenmile.com",
   "profile": [
     "USER"
   ]

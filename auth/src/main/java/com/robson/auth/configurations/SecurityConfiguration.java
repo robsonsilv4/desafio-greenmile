@@ -24,8 +24,8 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private final UserDetailsService userDetailsService;
@@ -33,11 +33,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private static final String[] PUBLIC_MATCHERS_POST = {"/login/**", "/usuarios/**"};
   private static final String[] PUBLIC_MATCHERS_GET = {"/usuarios/**", "/horas/**"};
-
-  @Override
-  public void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
-  }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
@@ -72,6 +67,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     source.registerCorsConfiguration("/**", configuration);
 
     return source;
+  }
+
+  @Override
+  public void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
   }
 
   @Bean

@@ -22,19 +22,14 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Employee implements Serializable {
 
-  private static final long serialVersionUID = 6269313493164561869L;
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String name;
-
-  @ToString.Exclude
   @Column(unique = true, nullable = false)
-  private String email;
+  private String username;
 
-  @JsonIgnore private String password;
+  @ToString.Exclude @JsonIgnore private String password;
 
   @ElementCollection(fetch = FetchType.EAGER)
   @CollectionTable(name = "profiles")
@@ -49,10 +44,9 @@ public class Employee implements Serializable {
     setProfile(Profile.USER);
   }
 
-  public Employee(Long id, String name, String email, String password) {
+  public Employee(Long id, String username, String password) {
     this.id = id;
-    this.name = name;
-    this.email = email;
+    this.username = username;
     this.password = password;
     setProfile(Profile.USER);
   }

@@ -14,14 +14,14 @@ public class UserSecurityDetails implements UserDetails {
   private static final long serialVersionUID = -5968531581852726455L;
 
   private Long id;
-  private String email;
+  private String username;
   private String password;
   private Collection<? extends GrantedAuthority> authorities;
 
-  public UserSecurityDetails(Long id, String email, String password, Set<Profile> perfis) {
+  public UserSecurityDetails(Long id, String username, String password, Set<Profile> perfis) {
     super();
     this.id = id;
-    this.email = email;
+    this.username = username;
     this.password = password;
     this.authorities =
         perfis.stream()
@@ -49,7 +49,7 @@ public class UserSecurityDetails implements UserDetails {
 
   @Override
   public String getUsername() {
-    return email;
+    return username;
   }
 
   @Override

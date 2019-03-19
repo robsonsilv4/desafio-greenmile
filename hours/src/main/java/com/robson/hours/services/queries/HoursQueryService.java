@@ -3,7 +3,7 @@ package com.robson.hours.services.queries;
 import com.robson.core.domains.WorkedHours;
 import org.springframework.data.domain.Page;
 
-public interface WorkedHoursQueryService {
+public interface HoursQueryService {
 
   WorkedHours find(Long id);
 

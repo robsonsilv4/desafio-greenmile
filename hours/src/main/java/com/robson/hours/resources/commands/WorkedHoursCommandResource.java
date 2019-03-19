@@ -1,7 +1,7 @@
 package com.robson.hours.resources.commands;
 
 import com.robson.core.domains.WorkedHours;
-import com.robson.hours.services.commands.WorkedHoursCommandService;
+import com.robson.hours.services.commands.HoursCommandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import java.net.URI;
     description = "Cadastro de horas trabalhadas.")
 public class WorkedHoursCommandResource {
 
-  @Autowired private WorkedHoursCommandService workedHoursService;
+  @Autowired private HoursCommandService workedHoursService;
 
   @PostMapping(
       consumes = "application/json",

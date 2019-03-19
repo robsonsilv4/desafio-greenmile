@@ -32,7 +32,7 @@ public class EmployeeQueryResource {
   public ResponseEntity<Page<EmployeeDTO>> findAll(
       @RequestParam(value = "page", defaultValue = "0") Integer page,
       @RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
-      @RequestParam(value = "orderBy", defaultValue = "name") String orderBy,
+      @RequestParam(value = "orderBy", defaultValue = "username") String orderBy,
       @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
     Page<Employee> list = usuarioService.findAll(page, linesPerPage, orderBy, direction);
     Page<EmployeeDTO> listDTO = list.map(obj -> new EmployeeDTO(obj));

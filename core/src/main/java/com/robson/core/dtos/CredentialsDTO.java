@@ -11,8 +11,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class CredentialsDTO implements Serializable {
 
-  private static final long serialVersionUID = 1501674406590648943L;
-
-  private String email;
+  private String username;
   private String password;
 }

@@ -2,7 +2,7 @@ package com.robson.hours.services.commands.impls;
 
 import com.robson.core.domains.WorkedHours;
 import com.robson.core.repositories.WorkedHoursRepository;
-import com.robson.hours.services.commands.WorkedHoursCommandService;
+import com.robson.hours.services.commands.HoursCommandService;
 import com.robson.hours.services.queries.EmployeeQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -13,7 +13,7 @@ import java.time.Duration;
 
 @Service
 @Transactional
-public class WorkedHoursCommandServiceImpl implements WorkedHoursCommandService {
+public class HoursCommandServiceImpl implements HoursCommandService {
 
   @Autowired private WorkedHoursRepository workedHoursRepository;
   @Autowired private EmployeeQueryService employeeService;

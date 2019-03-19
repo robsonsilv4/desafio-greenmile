@@ -17,15 +17,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   @Autowired private EmployeeRepository employeeRepository;
 
   @Override
-  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    Employee employee = employeeRepository.findByEmail(email);
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    Employee employee = employeeRepository.findByUsername(username);
 
     if (employee == null) {
-      throw new UsernameNotFoundException(email);
+      throw new UsernameNotFoundException(username);
     }
 
-    log.info("Procurando nos registros pelo usuário: {}", employee.getEmail());
+    log.info("Procurando nos registros pelo usuário: {}", employee.getUsername());
     return new UserSecurityDetails(
-        employee.getId(), employee.getEmail(), employee.getPassword(), employee.getProfile());
+        employee.getId(), employee.getUsername(), employee.getPassword(), employee.getProfile());
   }
 }

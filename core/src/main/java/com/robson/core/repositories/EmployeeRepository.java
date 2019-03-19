@@ -7,5 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
   @Transactional(readOnly = true)
-  Employee findByEmail(String email);
+  Employee findByUsername(String username);
 }
