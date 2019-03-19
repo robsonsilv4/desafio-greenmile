@@ -22,3 +22,7 @@ spring:
     properties:
       hibernate:
     show-sql: false
+
+jwt:
+  config:
+    type: signed

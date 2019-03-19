@@ -74,6 +74,7 @@ public class TokenCreator {
         .claim(
             "authorities",
             auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(toList()))
+        .claim("userId", employee.getId())
         .issuer("https://github.com/robsonsilv4")
         .issueTime(new Date())
         .expirationTime(

@@ -28,4 +28,4 @@ spring:
 
 jwt:
   config:
-type: signed
+    type: signed

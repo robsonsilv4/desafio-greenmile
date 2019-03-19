@@ -1,6 +1,7 @@
 package com.robson.core.domains;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.robson.core.domains.enums.Profile;
 import lombok.*;
 
@@ -16,9 +17,11 @@ import java.util.stream.Collectors;
 @Entity
 @Getter
 @Setter
+@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Employee implements Serializable {
 
@@ -32,6 +35,7 @@ public class Employee implements Serializable {
 
   @ToString.Exclude @JsonIgnore private String password;
 
+  @Builder.Default
   @Column(nullable = false)
   private String role = "USER";
 
