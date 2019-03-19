@@ -12,7 +12,7 @@ import java.time.LocalTime;
 @Entity
 @Getter
 @Setter
-public class HoraTrabalhada implements Serializable {
+public class WorkedHours implements Serializable {
 
   private static final long serialVersionUID = -192174945664887574L;
 
@@ -22,17 +22,17 @@ public class HoraTrabalhada implements Serializable {
 
   @JsonFormat(pattern = "dd/MM/yyyy")
   @Column(unique = true, nullable = false)
-  private LocalDate data;
+  private LocalDate date;
 
   @JsonFormat(pattern = "HH:mm")
-  private LocalTime horaEntrada;
+  private LocalTime initialTime;
 
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
-  private LocalTime horaSaida;
+  private LocalTime finalTime;
 
-  private Long horasTrabalhadas;
+  private Long workedHours;
 
   @ManyToOne
-  @JoinColumn(name = "usuario_id")
-  private Usuario usuario;
+  @JoinColumn(name = "employee_id")
+  private Employee employee;
 }

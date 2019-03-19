@@ -1,6 +1,6 @@
 package com.robson.desafiogreenmile.resource.command;
 
-import com.robson.desafiogreenmile.domain.HoraTrabalhada;
+import com.robson.desafiogreenmile.domain.WorkedHours;
 import com.robson.desafiogreenmile.service.command.HoraTrabalhadaCommandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,12 +29,12 @@ public class HoraTrabalhadaCommandResource {
       consumes = "application/json",
       headers = "content-type=application/x-www-form-urlencoded")
   @ApiOperation(value = "Cadastra um novo registro de horas trabalhadas.")
-  public ResponseEntity<Void> insert(@Valid @RequestBody HoraTrabalhada horaTrabalhada) {
-    horaTrabalhada = horaTrabalhadaCommand.insert(horaTrabalhada);
+  public ResponseEntity<Void> insert(@Valid @RequestBody WorkedHours workedHours) {
+    workedHours = horaTrabalhadaCommand.insert(workedHours);
     URI uri =
         ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{id}")
-            .buildAndExpand(horaTrabalhada.getId())
+            .buildAndExpand(workedHours.getId())
             .toUri();
     return ResponseEntity.created(uri).build();
   }

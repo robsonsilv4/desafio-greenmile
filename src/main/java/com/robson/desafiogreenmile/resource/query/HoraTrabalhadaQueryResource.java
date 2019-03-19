@@ -1,6 +1,6 @@
 package com.robson.desafiogreenmile.resource.query;
 
-import com.robson.desafiogreenmile.domain.HoraTrabalhada;
+import com.robson.desafiogreenmile.domain.WorkedHours;
 import com.robson.desafiogreenmile.service.query.HoraTrabalhadaQueryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,19 +21,19 @@ public class HoraTrabalhadaQueryResource {
 
   @GetMapping(value = "/{id}")
   @ApiOperation(value = "Busca por um determinado registro de horas trabalhadas.")
-  public ResponseEntity<HoraTrabalhada> find(@PathVariable Long id) {
-    HoraTrabalhada horaTrabalhada = horaTrabalhadaQuery.find(id);
-    return ResponseEntity.ok().body(horaTrabalhada);
+  public ResponseEntity<WorkedHours> find(@PathVariable Long id) {
+    WorkedHours workedHours = horaTrabalhadaQuery.find(id);
+    return ResponseEntity.ok().body(workedHours);
   }
 
   @GetMapping
   @ApiOperation(value = "Retorna todos os registros de horas trabalhadas.")
-  public ResponseEntity<Page<HoraTrabalhada>> findAll(
+  public ResponseEntity<Page<WorkedHours>> findAll(
       @RequestParam(value = "page", defaultValue = "0") Integer page,
       @RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
       @RequestParam(value = "orderBy", defaultValue = "data") String orderBy,
       @RequestParam(value = "direction", defaultValue = "DESC") String direction) {
-    Page<HoraTrabalhada> list = horaTrabalhadaQuery.findAll(page, linesPerPage, orderBy, direction);
+    Page<WorkedHours> list = horaTrabalhadaQuery.findAll(page, linesPerPage, orderBy, direction);
     return ResponseEntity.ok().body(list);
   }
 }

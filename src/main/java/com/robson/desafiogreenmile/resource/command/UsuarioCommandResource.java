@@ -1,6 +1,6 @@
 package com.robson.desafiogreenmile.resource.command;
 
-import com.robson.desafiogreenmile.domain.Usuario;
+import com.robson.desafiogreenmile.domain.Employee;
 import com.robson.desafiogreenmile.dto.NovoUsuarioDTO;
 import com.robson.desafiogreenmile.dto.UsuarioDTO;
 import com.robson.desafiogreenmile.service.command.UsuarioCommandService;
@@ -28,12 +28,12 @@ public class UsuarioCommandResource {
   @PostMapping
   @ApiOperation(value = "Cadastra um novo usuário.")
   public ResponseEntity<Void> insert(@Valid @RequestBody NovoUsuarioDTO novoUsuarioDTO) {
-    Usuario usuario = usuarioService.fromDTO(novoUsuarioDTO);
-    usuario = usuarioService.insert(usuario);
+    Employee employee = usuarioService.fromDTO(novoUsuarioDTO);
+    employee = usuarioService.insert(employee);
     URI uri =
         ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{id}")
-            .buildAndExpand(usuario.getId())
+            .buildAndExpand(employee.getId())
             .toUri();
     return ResponseEntity.created(uri).build();
   }
@@ -42,9 +42,9 @@ public class UsuarioCommandResource {
   @ApiOperation(value = "Atualiza as informações de um usuário existente.")
   public ResponseEntity<Void> update(
       @Valid @RequestBody UsuarioDTO usuarioDTO, @PathVariable Long id) {
-    Usuario usuario = usuarioService.fromDTO(usuarioDTO);
-    usuario.setId(id);
-    usuario = usuarioService.update(usuario);
+    Employee employee = usuarioService.fromDTO(usuarioDTO);
+    employee.setId(id);
+    employee = usuarioService.update(employee);
     return ResponseEntity.noContent().build();
   }
 

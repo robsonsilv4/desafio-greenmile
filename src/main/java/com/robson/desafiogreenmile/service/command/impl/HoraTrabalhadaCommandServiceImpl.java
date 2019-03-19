@@ -1,7 +1,7 @@
 package com.robson.desafiogreenmile.service.command.impl;
 
-import com.robson.desafiogreenmile.domain.HoraTrabalhada;
-import com.robson.desafiogreenmile.domain.Usuario;
+import com.robson.desafiogreenmile.domain.WorkedHours;
+import com.robson.desafiogreenmile.domain.Employee;
 import com.robson.desafiogreenmile.repository.HoraTrabalhadaRepository;
 import com.robson.desafiogreenmile.security.UserService;
 import com.robson.desafiogreenmile.security.UsuarioDetails;
@@ -22,15 +22,15 @@ public class HoraTrabalhadaCommandServiceImpl implements HoraTrabalhadaCommandSe
 
   //  @CachePut
   @Override
-  public HoraTrabalhada insert(HoraTrabalhada horaTrabalhada) {
-    horaTrabalhada.setId(null);
-    horaTrabalhada.setHorasTrabalhadas(
-        Duration.between(horaTrabalhada.getHoraEntrada(), horaTrabalhada.getHoraSaida()).toHours());
+  public WorkedHours insert(WorkedHours workedHours) {
+    workedHours.setId(null);
+    workedHours.setWorkedHours(
+        Duration.between(workedHours.getInitialTime(), workedHours.getFinalTime()).toHours());
 
     UsuarioDetails user = UserService.authenticated();
-    Usuario usuario = usuarioService.find(user.getId());
-    horaTrabalhada.setUsuario(usuario);
+    Employee employee = usuarioService.find(user.getId());
+    workedHours.setEmployee(employee);
 
-    return horaTrabalhadaRepository.save(horaTrabalhada);
+    return horaTrabalhadaRepository.save(workedHours);
   }
 }

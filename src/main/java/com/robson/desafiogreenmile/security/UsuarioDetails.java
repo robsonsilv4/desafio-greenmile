@@ -1,6 +1,6 @@
 package com.robson.desafiogreenmile.security;
 
-import com.robson.desafiogreenmile.domain.enumeration.Perfil;
+import com.robson.desafiogreenmile.domain.enumeration.Profile;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,14 +18,14 @@ public class UsuarioDetails implements UserDetails {
   private String senha;
   private Collection<? extends GrantedAuthority> authorities;
 
-  public UsuarioDetails(Long id, String email, String senha, Set<Perfil> perfis) {
+  public UsuarioDetails(Long id, String email, String senha, Set<Profile> perfis) {
     super();
     this.id = id;
     this.email = email;
     this.senha = senha;
     this.authorities =
         perfis.stream()
-            .map(x -> new SimpleGrantedAuthority(x.getDescricao()))
+            .map(x -> new SimpleGrantedAuthority(x.getDescription()))
             .collect(Collectors.toList());
   }
 
@@ -33,8 +33,8 @@ public class UsuarioDetails implements UserDetails {
     return id;
   }
 
-  public boolean hasRole(Perfil perfil) {
-    return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
+  public boolean hasRole(Profile profile) {
+    return getAuthorities().contains(new SimpleGrantedAuthority(profile.getDescription()));
   }
 
   @Override

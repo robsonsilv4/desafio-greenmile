@@ -1,6 +1,6 @@
 package com.robson.desafiogreenmile.dto;
 
-import com.robson.desafiogreenmile.domain.Usuario;
+import com.robson.desafiogreenmile.domain.Employee;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,9 +26,9 @@ public class UsuarioDTO implements Serializable {
   @NotEmpty(message = "Email inválido!")
   private String email;
 
-  public UsuarioDTO(@NotNull Usuario usuario) {
-    id = usuario.getId();
-    nome = usuario.getNome();
-    email = usuario.getEmail();
+  public UsuarioDTO(@NotNull Employee employee) {
+    id = employee.getId();
+    nome = employee.getName();
+    email = employee.getEmail();
   }
 }

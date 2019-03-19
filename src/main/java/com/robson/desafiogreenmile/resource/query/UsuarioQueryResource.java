@@ -1,6 +1,6 @@
 package com.robson.desafiogreenmile.resource.query;
 
-import com.robson.desafiogreenmile.domain.Usuario;
+import com.robson.desafiogreenmile.domain.Employee;
 import com.robson.desafiogreenmile.dto.UsuarioDTO;
 import com.robson.desafiogreenmile.service.query.UsuarioQueryService;
 import io.swagger.annotations.Api;
@@ -23,8 +23,8 @@ public class UsuarioQueryResource {
   @GetMapping(value = "/{id}")
   @ApiOperation(value = "Retorna um determinado usuário.")
   public ResponseEntity<?> find(@PathVariable Long id) {
-    Usuario usuario = usuarioService.find(id);
-    return ResponseEntity.ok().body(usuario);
+    Employee employee = usuarioService.find(id);
+    return ResponseEntity.ok().body(employee);
   }
 
   // Utilizar @PreAuthorize caso o usuário não possa listar os outros usuários,
@@ -38,7 +38,7 @@ public class UsuarioQueryResource {
       @RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
       @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
       @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
-    Page<Usuario> list = usuarioService.findAll(page, linesPerPage, orderBy, direction);
+    Page<Employee> list = usuarioService.findAll(page, linesPerPage, orderBy, direction);
     Page<UsuarioDTO> listDTO = list.map(obj -> new UsuarioDTO(obj));
     return ResponseEntity.ok().body(listDTO);
   }

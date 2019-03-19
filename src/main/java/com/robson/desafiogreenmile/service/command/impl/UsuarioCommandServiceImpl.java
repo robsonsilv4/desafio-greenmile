@@ -1,6 +1,6 @@
 package com.robson.desafiogreenmile.service.command.impl;
 
-import com.robson.desafiogreenmile.domain.Usuario;
+import com.robson.desafiogreenmile.domain.Employee;
 import com.robson.desafiogreenmile.dto.NovoUsuarioDTO;
 import com.robson.desafiogreenmile.dto.UsuarioDTO;
 import com.robson.desafiogreenmile.repository.UsuarioRepository;
@@ -20,17 +20,17 @@ public class UsuarioCommandServiceImpl implements UsuarioCommandService {
   @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Override
-  public Usuario insert(Usuario usuario) {
-    usuario.setId(null);
-    usuario = usuarioRepository.save(usuario);
-    return usuario;
+  public Employee insert(Employee employee) {
+    employee.setId(null);
+    employee = usuarioRepository.save(employee);
+    return employee;
   }
 
   @Override
-  public Usuario update(Usuario usuario) {
-    Usuario novoUsuario = usuarioQuery.find(usuario.getId());
-    updateData(novoUsuario, usuario);
-    return usuarioRepository.save(novoUsuario);
+  public Employee update(Employee employee) {
+    Employee novoEmployee = usuarioQuery.find(employee.getId());
+    updateData(novoEmployee, employee);
+    return usuarioRepository.save(novoEmployee);
   }
 
   @Override
@@ -40,17 +40,17 @@ public class UsuarioCommandServiceImpl implements UsuarioCommandService {
   }
 
   // Métodos auxiliares
-  public void updateData(Usuario novoUsuario, Usuario usuario) {
-    novoUsuario.setNome(usuario.getNome());
-    novoUsuario.setEmail(usuario.getEmail());
+  public void updateData(Employee novoEmployee, Employee employee) {
+    novoEmployee.setName(employee.getName());
+    novoEmployee.setEmail(employee.getEmail());
   }
 
-  public Usuario fromDTO(UsuarioDTO usuarioDTO) {
-    return new Usuario(usuarioDTO.getId(), usuarioDTO.getNome(), usuarioDTO.getEmail(), null);
+  public Employee fromDTO(UsuarioDTO usuarioDTO) {
+    return new Employee(usuarioDTO.getId(), usuarioDTO.getNome(), usuarioDTO.getEmail(), null);
   }
 
-  public Usuario fromDTO(NovoUsuarioDTO novoDTO) {
-    return new Usuario(
+  public Employee fromDTO(NovoUsuarioDTO novoDTO) {
+    return new Employee(
         null,
         novoDTO.getNome(),
         novoDTO.getEmail(),

@@ -1,8 +1,8 @@
 package com.robson.desafiogreenmile.service.command;
 
-import com.robson.desafiogreenmile.domain.HoraTrabalhada;
+import com.robson.desafiogreenmile.domain.WorkedHours;
 
 public interface HoraTrabalhadaCommandService {
 
-  HoraTrabalhada insert(HoraTrabalhada horaTrabalhada);
+  WorkedHours insert(WorkedHours workedHours);
 }
