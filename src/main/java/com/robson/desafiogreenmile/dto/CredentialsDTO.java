@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CredenciaisDTO implements Serializable {
+public class CredentialsDTO implements Serializable {
 
   private static final long serialVersionUID = 1501674406590648943L;
 

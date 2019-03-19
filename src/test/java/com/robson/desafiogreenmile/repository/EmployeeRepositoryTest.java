@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 public class EmployeeRepositoryTest {
 
-  @Autowired private UsuarioRepository usuarioRepository;
+  @Autowired private EmployeeRepository employeeRepository;
   @Rule public ExpectedException thrown = ExpectedException.none();
 
   @Test
@@ -30,7 +30,7 @@ public class EmployeeRepositoryTest {
     employee.setName("Robson");
     employee.setEmail("robson@gmail.com");
 
-    this.usuarioRepository.save(employee);
+    this.employeeRepository.save(employee);
 
     assertThat(employee.getId()).isNotNull();
     assertThat(employee.getName()).isEqualTo("Robson");
@@ -45,11 +45,11 @@ public class EmployeeRepositoryTest {
     employee.setName("Samuel");
     employee.setEmail("samuel@greenmile.com");
 
-    this.usuarioRepository.save(employee);
+    this.employeeRepository.save(employee);
 
-    this.usuarioRepository.delete(employee);
+    this.employeeRepository.delete(employee);
 
-    assertThat(usuarioRepository.findById(employee.getId())).isEmpty();
+    assertThat(employeeRepository.findById(employee.getId())).isEmpty();
   }
 
   @Test
@@ -60,14 +60,14 @@ public class EmployeeRepositoryTest {
     employee.setName("Robson");
     employee.setEmail("robsonsilva@gmail.com");
 
-    this.usuarioRepository.save(employee);
+    this.employeeRepository.save(employee);
 
     employee.setName("Robson Silva");
     employee.setEmail("robsonsilva@greenmile.com");
 
-    this.usuarioRepository.save(employee);
+    this.employeeRepository.save(employee);
 
-    Optional<Employee> usuarioAtualizado = usuarioRepository.findById(employee.getId());
+    Optional<Employee> usuarioAtualizado = employeeRepository.findById(employee.getId());
 
     assertThat(usuarioAtualizado.get().getName()).isEqualTo("Robson Silva");
     assertThat(usuarioAtualizado.get().getEmail()).isEqualTo("robsonsilva@greenmile.com");
@@ -76,7 +76,7 @@ public class EmployeeRepositoryTest {
   @Test
   public void emailNaoPodeSerNulo() {
     thrown.expect(DataIntegrityViolationException.class);
-    this.usuarioRepository.save(new Employee());
+    this.employeeRepository.save(new Employee());
   }
 
   @Test
@@ -89,6 +89,6 @@ public class EmployeeRepositoryTest {
     Employee employee2 = new Employee();
     employee2.setEmail("robson@gmail.com");
 
-    this.usuarioRepository.saveAll(Arrays.asList(employee1, employee2));
+    this.employeeRepository.saveAll(Arrays.asList(employee1, employee2));
   }
 }

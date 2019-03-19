@@ -3,7 +3,7 @@ package com.robson.desafiogreenmile.service.query;
 import com.robson.desafiogreenmile.domain.WorkedHours;
 import org.springframework.data.domain.Page;
 
-public interface HoraTrabalhadaQueryService {
+public interface WorkedHoursQueryService {
 
   WorkedHours find(Long id);
 

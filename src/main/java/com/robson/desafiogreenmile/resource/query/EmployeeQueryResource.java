@@ -1,8 +1,8 @@
 package com.robson.desafiogreenmile.resource.query;
 
 import com.robson.desafiogreenmile.domain.Employee;
-import com.robson.desafiogreenmile.dto.UsuarioDTO;
-import com.robson.desafiogreenmile.service.query.UsuarioQueryService;
+import com.robson.desafiogreenmile.dto.EmployeeDTO;
+import com.robson.desafiogreenmile.service.query.EmployeeQueryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
     value = "Usuários - Consultas",
     tags = "Usuários - Consultas",
     description = "Consultas de usuários.")
-public class UsuarioQueryResource {
+public class EmployeeQueryResource {
 
-  @Autowired private UsuarioQueryService usuarioService;
+  @Autowired private EmployeeQueryService usuarioService;
 
   @GetMapping(value = "/{id}")
   @ApiOperation(value = "Retorna um determinado usuário.")
@@ -33,13 +33,13 @@ public class UsuarioQueryResource {
   //  @PreAuthorize("hasAnyRole('ADMIN')")
   @GetMapping
   @ApiOperation(value = "Retorna uma lista com todos os usuários.")
-  public ResponseEntity<Page<UsuarioDTO>> findAll(
+  public ResponseEntity<Page<EmployeeDTO>> findAll(
       @RequestParam(value = "page", defaultValue = "0") Integer page,
       @RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
       @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
       @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
     Page<Employee> list = usuarioService.findAll(page, linesPerPage, orderBy, direction);
-    Page<UsuarioDTO> listDTO = list.map(obj -> new UsuarioDTO(obj));
+    Page<EmployeeDTO> listDTO = list.map(obj -> new EmployeeDTO(obj));
     return ResponseEntity.ok().body(listDTO);
   }
 }

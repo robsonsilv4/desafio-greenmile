@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class UsuarioDetails implements UserDetails {
+public class UserSecurityDetails implements UserDetails {
 
   private static final long serialVersionUID = -5968531581852726455L;
 
@@ -18,7 +18,7 @@ public class UsuarioDetails implements UserDetails {
   private String senha;
   private Collection<? extends GrantedAuthority> authorities;
 
-  public UsuarioDetails(Long id, String email, String senha, Set<Profile> perfis) {
+  public UserSecurityDetails(Long id, String email, String senha, Set<Profile> perfis) {
     super();
     this.id = id;
     this.email = email;

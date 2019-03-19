@@ -1,7 +1,7 @@
 package com.robson.desafiogreenmile.resource.query;
 
 import com.robson.desafiogreenmile.domain.WorkedHours;
-import com.robson.desafiogreenmile.service.query.HoraTrabalhadaQueryService;
+import com.robson.desafiogreenmile.service.query.WorkedHoursQueryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.*;
     value = "Horas Trabalhadas - Consultas",
     tags = "Horas Trabalhadas - Consultas",
     description = "Consultas de horas trabalhadas.")
-public class HoraTrabalhadaQueryResource {
+public class WorkedHoursQueryResource {
 
-  @Autowired private HoraTrabalhadaQueryService horaTrabalhadaQuery;
+  @Autowired private WorkedHoursQueryService horaTrabalhadaQuery;
 
   @GetMapping(value = "/{id}")
   @ApiOperation(value = "Busca por um determinado registro de horas trabalhadas.")

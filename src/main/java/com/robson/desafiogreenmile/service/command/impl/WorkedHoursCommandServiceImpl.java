@@ -2,11 +2,11 @@ package com.robson.desafiogreenmile.service.command.impl;
 
 import com.robson.desafiogreenmile.domain.WorkedHours;
 import com.robson.desafiogreenmile.domain.Employee;
-import com.robson.desafiogreenmile.repository.HoraTrabalhadaRepository;
+import com.robson.desafiogreenmile.repository.WorkedHoursRepository;
 import com.robson.desafiogreenmile.security.UserService;
-import com.robson.desafiogreenmile.security.UsuarioDetails;
-import com.robson.desafiogreenmile.service.command.HoraTrabalhadaCommandService;
-import com.robson.desafiogreenmile.service.query.UsuarioQueryService;
+import com.robson.desafiogreenmile.security.UserSecurityDetails;
+import com.robson.desafiogreenmile.service.command.WorkedHoursCommandService;
+import com.robson.desafiogreenmile.service.query.EmployeeQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,10 +15,10 @@ import java.time.Duration;
 
 @Service
 @Transactional
-public class HoraTrabalhadaCommandServiceImpl implements HoraTrabalhadaCommandService {
+public class WorkedHoursCommandServiceImpl implements WorkedHoursCommandService {
 
-  @Autowired private HoraTrabalhadaRepository horaTrabalhadaRepository;
-  @Autowired private UsuarioQueryService usuarioService;
+  @Autowired private WorkedHoursRepository workedHoursRepository;
+  @Autowired private EmployeeQueryService usuarioService;
 
   //  @CachePut
   @Override
@@ -27,10 +27,10 @@ public class HoraTrabalhadaCommandServiceImpl implements HoraTrabalhadaCommandSe
     workedHours.setWorkedHours(
         Duration.between(workedHours.getInitialTime(), workedHours.getFinalTime()).toHours());
 
-    UsuarioDetails user = UserService.authenticated();
+    UserSecurityDetails user = UserService.authenticated();
     Employee employee = usuarioService.find(user.getId());
     workedHours.setEmployee(employee);
 
-    return horaTrabalhadaRepository.save(workedHours);
+    return workedHoursRepository.save(workedHours);
   }
 }

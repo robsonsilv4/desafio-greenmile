@@ -2,9 +2,9 @@ package com.robson.desafiogreenmile.service.query.impl;
 
 import com.robson.desafiogreenmile.domain.WorkedHours;
 import com.robson.desafiogreenmile.exception.ObjectNotFoundException;
-import com.robson.desafiogreenmile.repository.HoraTrabalhadaRepository;
-import com.robson.desafiogreenmile.service.query.HoraTrabalhadaQueryService;
-import com.robson.desafiogreenmile.service.query.UsuarioQueryService;
+import com.robson.desafiogreenmile.repository.WorkedHoursRepository;
+import com.robson.desafiogreenmile.service.query.WorkedHoursQueryService;
+import com.robson.desafiogreenmile.service.query.EmployeeQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,14 +19,14 @@ import java.util.Optional;
 @Service
 @Transactional
 @CacheConfig(cacheNames = {"horas"})
-public class HoraTrabalhadaQueryServiceImpl implements HoraTrabalhadaQueryService {
+public class WorkedHoursQueryServiceImpl implements WorkedHoursQueryService {
 
-  @Autowired private HoraTrabalhadaRepository horaTrabalhadaRepository;
-  @Autowired private UsuarioQueryService usuarioService;
+  @Autowired private WorkedHoursRepository workedHoursRepository;
+  @Autowired private EmployeeQueryService usuarioService;
 
   //  @Cacheable
   public WorkedHours find(Long id) {
-    Optional<WorkedHours> horaTrabalhada = horaTrabalhadaRepository.findById(id);
+    Optional<WorkedHours> horaTrabalhada = workedHoursRepository.findById(id);
     return horaTrabalhada.orElseThrow(
         () ->
             new ObjectNotFoundException(
@@ -37,17 +37,17 @@ public class HoraTrabalhadaQueryServiceImpl implements HoraTrabalhadaQueryServic
   public Page<WorkedHours> findAll(
       Integer page, Integer linesPerPage, String orderBy, String direction) {
     // Implementação para garantir que o usuário recupere somente suas horas.
-    //  UsuarioDetails user = UserService.authenticated();
+    //  UserSecurityDetails user = UserService.authenticated();
     //    if (user == null) {
     //    throw new AuthorizationException("Acesso negado!");
     //  }
     // ...
     // Employee employee = usuarioService.find(user.getId());
     // ...
-    // return horaTrabalhadaRepository.findByUsuario(employee, pageRequest);
+    // return workedHoursRepository.findByUsuario(employee, pageRequest);
 
     PageRequest pageRequest =
         PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-    return horaTrabalhadaRepository.findAll(pageRequest);
+    return workedHoursRepository.findAll(pageRequest);
   }
 }

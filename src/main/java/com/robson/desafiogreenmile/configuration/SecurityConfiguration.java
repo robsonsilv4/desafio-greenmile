@@ -2,7 +2,7 @@ package com.robson.desafiogreenmile.configuration;
 
 import com.robson.desafiogreenmile.security.JWTAuthenticationFilter;
 import com.robson.desafiogreenmile.security.JWTAuthorizationFilter;
-import com.robson.desafiogreenmile.security.JWTUtil;
+import com.robson.desafiogreenmile.security.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

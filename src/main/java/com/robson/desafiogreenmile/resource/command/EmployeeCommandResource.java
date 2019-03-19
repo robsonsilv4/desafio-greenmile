@@ -1,9 +1,9 @@
 package com.robson.desafiogreenmile.resource.command;
 
 import com.robson.desafiogreenmile.domain.Employee;
-import com.robson.desafiogreenmile.dto.NovoUsuarioDTO;
-import com.robson.desafiogreenmile.dto.UsuarioDTO;
-import com.robson.desafiogreenmile.service.command.UsuarioCommandService;
+import com.robson.desafiogreenmile.dto.EmployeeNewDTO;
+import com.robson.desafiogreenmile.dto.EmployeeDTO;
+import com.robson.desafiogreenmile.service.command.EmployeeCommandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +22,13 @@ import java.net.URI;
     value = "Usuários - Comandos",
     tags = "Usuários - Comandos",
     description = "Cadastro, alteração e deleção de usuários.")
-public class UsuarioCommandResource {
-  @Autowired private UsuarioCommandService usuarioService;
+public class EmployeeCommandResource {
+  @Autowired private EmployeeCommandService usuarioService;
 
   @PostMapping
   @ApiOperation(value = "Cadastra um novo usuário.")
-  public ResponseEntity<Void> insert(@Valid @RequestBody NovoUsuarioDTO novoUsuarioDTO) {
-    Employee employee = usuarioService.fromDTO(novoUsuarioDTO);
+  public ResponseEntity<Void> insert(@Valid @RequestBody EmployeeNewDTO employeeNewDTO) {
+    Employee employee = usuarioService.fromDTO(employeeNewDTO);
     employee = usuarioService.insert(employee);
     URI uri =
         ServletUriComponentsBuilder.fromCurrentRequest()
@@ -41,8 +41,8 @@ public class UsuarioCommandResource {
   @PutMapping(value = "/{id}")
   @ApiOperation(value = "Atualiza as informações de um usuário existente.")
   public ResponseEntity<Void> update(
-      @Valid @RequestBody UsuarioDTO usuarioDTO, @PathVariable Long id) {
-    Employee employee = usuarioService.fromDTO(usuarioDTO);
+          @Valid @RequestBody EmployeeDTO employeeDTO, @PathVariable Long id) {
+    Employee employee = usuarioService.fromDTO(employeeDTO);
     employee.setId(id);
     employee = usuarioService.update(employee);
     return ResponseEntity.noContent().build();

@@ -1,7 +1,7 @@
 package com.robson.desafiogreenmile.resource;
 
 import com.jayway.jsonpath.JsonPath;
-import com.robson.desafiogreenmile.repository.UsuarioRepository;
+import com.robson.desafiogreenmile.repository.EmployeeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class EmployeeResourceTest {
 
   @Autowired private MockMvc mockMvc;
-  @Autowired private UsuarioRepository usuarioRepository;
+  @Autowired private EmployeeRepository employeeRepository;
   @Autowired private WebApplicationContext webApplicationContext;
 
   private ResultActions insertUsuario(String json) throws Exception {

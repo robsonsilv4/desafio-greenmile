@@ -1,7 +1,8 @@
 package com.robson.desafiogreenmile.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.robson.desafiogreenmile.dto.CredenciaisDTO;
+import com.robson.desafiogreenmile.dto.CredentialsDTO;
+import com.robson.desafiogreenmile.security.util.JWTUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -32,8 +33,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
   public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res)
       throws AuthenticationException {
     try {
-      CredenciaisDTO credenciais =
-          new ObjectMapper().readValue(req.getInputStream(), CredenciaisDTO.class);
+      CredentialsDTO credenciais =
+          new ObjectMapper().readValue(req.getInputStream(), CredentialsDTO.class);
 
       UsernamePasswordAuthenticationToken authToken =
           new UsernamePasswordAuthenticationToken(
@@ -50,7 +51,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
   protected void successfulAuthentication(
       HttpServletRequest req, HttpServletResponse res, FilterChain chain, Authentication auth)
       throws IOException, ServletException {
-    String username = ((UsuarioDetails) auth.getPrincipal()).getUsername();
+    String username = ((UserSecurityDetails) auth.getPrincipal()).getUsername();
     String token = jwtUtil.generateToken(username);
     res.addHeader("Authorization", "Bearer " + token);
     res.addHeader("access-control-expose-headers", "Authorization");

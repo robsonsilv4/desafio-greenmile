@@ -1,8 +1,8 @@
 package com.robson.desafiogreenmile.resource.command;
 
-import com.robson.desafiogreenmile.security.JWTUtil;
+import com.robson.desafiogreenmile.security.UserSecurityDetails;
+import com.robson.desafiogreenmile.security.util.JWTUtil;
 import com.robson.desafiogreenmile.security.UserService;
-import com.robson.desafiogreenmile.security.UsuarioDetails;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +18,13 @@ import javax.servlet.http.HttpServletResponse;
     value = "Autenticação - Token",
     tags = "Autenticação - Token",
     description = "Gera um novo token para o usuário.")
-public class AuthCommandResource {
+public class AuthenticationCommandResource {
 
   @Autowired private JWTUtil jwtUtil;
 
   @PostMapping(value = "/refresh-token")
   public ResponseEntity<Void> refreshToken(HttpServletResponse response) {
-    UsuarioDetails user = UserService.authenticated();
+    UserSecurityDetails user = UserService.authenticated();
     String token = jwtUtil.generateToken(user.getUsername());
     response.addHeader("Authorization", "Bearer " + token);
     response.addHeader("access-control-expose-headers", "Authorization");

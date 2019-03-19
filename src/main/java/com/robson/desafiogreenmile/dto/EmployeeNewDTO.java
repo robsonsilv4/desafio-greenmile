@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class NovoUsuarioDTO implements Serializable {
+public class EmployeeNewDTO implements Serializable {
 
   private static final long serialVersionUID = 916643947514327981L;
 

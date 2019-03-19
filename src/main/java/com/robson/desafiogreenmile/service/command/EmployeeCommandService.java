@@ -1,10 +1,10 @@
 package com.robson.desafiogreenmile.service.command;
 
 import com.robson.desafiogreenmile.domain.Employee;
-import com.robson.desafiogreenmile.dto.NovoUsuarioDTO;
-import com.robson.desafiogreenmile.dto.UsuarioDTO;
+import com.robson.desafiogreenmile.dto.EmployeeNewDTO;
+import com.robson.desafiogreenmile.dto.EmployeeDTO;
 
-public interface UsuarioCommandService {
+public interface EmployeeCommandService {
   Employee insert(Employee employee);
 
   Employee update(Employee employee);
@@ -12,7 +12,7 @@ public interface UsuarioCommandService {
   void delete(Long id);
 
   // Métodos auxiliares
-  Employee fromDTO(UsuarioDTO usuarioDTO);
+  Employee fromDTO(EmployeeDTO employeeDTO);
 
-  Employee fromDTO(NovoUsuarioDTO novoDTO);
+  Employee fromDTO(EmployeeNewDTO novoDTO);
 }

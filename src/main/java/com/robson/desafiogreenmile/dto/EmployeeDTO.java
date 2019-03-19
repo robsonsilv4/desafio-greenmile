@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UsuarioDTO implements Serializable {
+public class EmployeeDTO implements Serializable {
 
   private static final long serialVersionUID = 3537283637312947563L;
 
@@ -26,7 +26,7 @@ public class UsuarioDTO implements Serializable {
   @NotEmpty(message = "Email inválido!")
   private String email;
 
-  public UsuarioDTO(@NotNull Employee employee) {
+  public EmployeeDTO(@NotNull Employee employee) {
     id = employee.getId();
     nome = employee.getName();
     email = employee.getEmail();

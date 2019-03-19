@@ -1,7 +1,7 @@
 package com.robson.desafiogreenmile.resource.command;
 
 import com.robson.desafiogreenmile.domain.WorkedHours;
-import com.robson.desafiogreenmile.service.command.HoraTrabalhadaCommandService;
+import com.robson.desafiogreenmile.service.command.WorkedHoursCommandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +21,16 @@ import java.net.URI;
     value = "Horas Trabalhadas - Comandos",
     tags = "Horas Trabalhadas - Comandos",
     description = "Cadastro de horas trabalhadas.")
-public class HoraTrabalhadaCommandResource {
+public class WorkedHoursCommandResource {
 
-  @Autowired private HoraTrabalhadaCommandService horaTrabalhadaCommand;
+  @Autowired private WorkedHoursCommandService workedHoursService;
 
   @PostMapping(
       consumes = "application/json",
       headers = "content-type=application/x-www-form-urlencoded")
   @ApiOperation(value = "Cadastra um novo registro de horas trabalhadas.")
   public ResponseEntity<Void> insert(@Valid @RequestBody WorkedHours workedHours) {
-    workedHours = horaTrabalhadaCommand.insert(workedHours);
+    workedHours = workedHoursService.insert(workedHours);
     URI uri =
         ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{id}")

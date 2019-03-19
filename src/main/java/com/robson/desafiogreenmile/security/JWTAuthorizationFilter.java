@@ -1,5 +1,6 @@
 package com.robson.desafiogreenmile.security;
 
+import com.robson.desafiogreenmile.security.util.JWTUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
