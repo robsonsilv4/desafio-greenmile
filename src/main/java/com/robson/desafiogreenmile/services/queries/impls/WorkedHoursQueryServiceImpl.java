@@ -5,6 +5,8 @@ import com.robson.desafiogreenmile.exceptions.ObjectNotFoundException;
 import com.robson.desafiogreenmile.repositories.WorkedHoursRepository;
 import com.robson.desafiogreenmile.services.queries.EmployeeQueryService;
 import com.robson.desafiogreenmile.services.queries.WorkedHoursQueryService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,13 +18,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 @Transactional
-@CacheConfig(cacheNames = {"horas"})
+@CacheConfig(cacheNames = {"hours"})
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class WorkedHoursQueryServiceImpl implements WorkedHoursQueryService {
 
-  @Autowired private WorkedHoursRepository workedHoursRepository;
-  @Autowired private EmployeeQueryService usuarioService;
+  private final WorkedHoursRepository workedHoursRepository;
+  private final EmployeeQueryService employeeService;
 
   public WorkedHours find(Long id) {
     Optional<WorkedHours> workedHours = workedHoursRepository.findById(id);
@@ -35,19 +39,6 @@ public class WorkedHoursQueryServiceImpl implements WorkedHoursQueryService {
   @Cacheable
   public Page<WorkedHours> findAll(
       Integer page, Integer linesPerPage, String orderBy, String direction) {
-    /*
-    Implementação para garantir que o usuário recupere somente suas horas.
-
-    UserSecurityDetails user = UserService.authenticated();
-    if (user == null) {
-    throw new AuthorizationException("Acesso negado!");
-    }
-    ...
-    Employee employee = employeeService.find(user.getId());
-    ...
-    return workedHoursRepository.findByEmployee(employee, pageRequest);
-    */
-
     PageRequest pageRequest =
         PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
     return workedHoursRepository.findAll(pageRequest);

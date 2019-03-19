@@ -4,12 +4,17 @@ import com.robson.desafiogreenmile.domains.WorkedHours;
 import com.robson.desafiogreenmile.services.queries.WorkedHoursQueryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping(value = "/horas")
 @Api(
     value = "Horas Trabalhadas - Consultas",
@@ -17,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
     description = "Consultas de horas trabalhadas.")
 public class WorkedHoursQueryResource {
 
-  @Autowired private WorkedHoursQueryService workedHoursService;
+  private final WorkedHoursQueryService workedHoursService;
 
   @GetMapping(value = "/{id}")
   @ApiOperation(value = "Busca por um determinado registro de horas trabalhadas.")
@@ -26,7 +31,7 @@ public class WorkedHoursQueryResource {
     return ResponseEntity.ok().body(workedHours);
   }
 
-  @GetMapping
+  @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @ApiOperation(value = "Busca todos os registros de horas trabalhadas.")
   public ResponseEntity<Page<WorkedHours>> findAll(
       @RequestParam(value = "page", defaultValue = "0") Integer page,

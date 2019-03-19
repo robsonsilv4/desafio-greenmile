@@ -22,7 +22,7 @@ public class ResourceExceptionHandler {
         new StandardError(
             System.currentTimeMillis(),
             HttpStatus.NOT_FOUND.value(),
-            "Não encontrado(a)!",
+            "Não encontrado!",
             e.getMessage(),
             request.getRequestURI());
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);

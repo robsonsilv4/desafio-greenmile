@@ -8,6 +8,7 @@ import com.robson.desafiogreenmile.security.UserService;
 import com.robson.desafiogreenmile.services.commands.WorkedHoursCommandService;
 import com.robson.desafiogreenmile.services.queries.EmployeeQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,11 @@ public class WorkedHoursCommandServiceImpl implements WorkedHoursCommandService 
   @Override
   public WorkedHours insert(WorkedHours workedHours) {
     workedHours.setId(null);
+
+    if (workedHours.getInitialTime().isBefore(workedHours.getFinalTime())) {
+      throw new DataIntegrityViolationException("A data final deve ser posterior a data inicial!");
+    }
+
     workedHours.setWorkedHours(
         Duration.between(workedHours.getInitialTime(), workedHours.getFinalTime()).toHours());
 
