@@ -44,11 +44,11 @@ public class EmployeeCommandServiceImpl implements EmployeeCommandService {
     newEmployee.setUsername(employee.getUsername());
   }
 
-  public Employee fromDTO(EmployeeDTO employeeDTO) {
-    return new Employee(employeeDTO.getId(), employeeDTO.getUsername(), null);
-  }
-
-  public Employee fromDTO(EmployeeNewDTO newDTO) {
-    return new Employee(null, newDTO.getUsername(), newDTO.getPassword());
-  }
+  //  public Employee fromDTO(EmployeeDTO employeeDTO) {
+  //    return new Employee(employeeDTO.getId(), employeeDTO.getUsername(), null);
+  //  }
+  //
+  //  public Employee fromDTO(EmployeeNewDTO newDTO) {
+  //    return new Employee(null, newDTO.getUsername(), newDTO.getPassword());
+  //  }
 }

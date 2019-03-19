@@ -2,50 +2,37 @@ package com.robson.auth.security.configuration;
 
 import com.robson.auth.security.filters.JwtUsernameAndPasswordAuthenticationFilter;
 import com.robson.core.configuration.JwtConfiguration;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.robson.token.configurations.SecurityTokenConfig;
+import com.robson.token.creator.TokenCreator;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-
-import javax.servlet.http.HttpServletResponse;
-
-import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @EnableWebSecurity
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
+public class SecurityCredentialsConfig extends SecurityTokenConfig {
+
   private final UserDetailsService userDetailsService;
-  private final JwtConfiguration jwtConfiguration;
+  private final TokenCreator tokenCreator;
+
+  public SecurityCredentialsConfig(
+      JwtConfiguration jwtConfiguration,
+      @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService,
+      TokenCreator tokenCreator) {
+    super(jwtConfiguration);
+    this.userDetailsService = userDetailsService;
+    this.tokenCreator = tokenCreator;
+  }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.csrf()
-        .disable()
-        .cors()
-        .configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
-        .and()
-        .sessionManagement()
-        .sessionCreationPolicy(STATELESS)
-        .and()
-        .exceptionHandling()
-        .authenticationEntryPoint(
-            (req, resp, e) -> resp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
-        .and()
-        .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfiguration))
-        .authorizeRequests()
-        .antMatchers(jwtConfiguration.getLoginUrl())
-        .permitAll()
-        .antMatchers("/hours/admin/**")
-        .hasRole("ADMIN")
-        .anyRequest()
-        .authenticated();
+    http.addFilter(
+        new JwtUsernameAndPasswordAuthenticationFilter(
+            authenticationManager(), jwtConfiguration, tokenCreator));
+    super.configure(http);
   }
 
   @Override
