@@ -1,8 +1,9 @@
-package com.robson.workedhours.configurations;
+package com.robson.auth.configurations;
 
-import com.robson.workedhours.filters.JWTAuthenticationFilter;
-import com.robson.workedhours.filters.JWTAuthorizationFilter;
-import com.robson.workedhours.filters.utils.JWTUtil;
+import com.robson.auth.filters.JWTAuthenticationFilter;
+import com.robson.auth.filters.JWTAuthorizationFilter;
+import com.robson.auth.filters.utils.JWTUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,12 +24,12 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  @Autowired private UserDetailsService userDetailsService;
-
-  @Autowired private JWTUtil jwtUtil;
+  private final UserDetailsService userDetailsService;
+  private final JWTUtil jwtUtil;
 
   private static final String[] PUBLIC_MATCHERS_POST = {"/login/**", "/usuarios/**"};
   private static final String[] PUBLIC_MATCHERS_GET = {"/usuarios/**", "/horas/**"};

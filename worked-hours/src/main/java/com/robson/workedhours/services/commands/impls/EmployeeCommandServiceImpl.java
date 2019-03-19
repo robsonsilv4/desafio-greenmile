@@ -17,7 +17,7 @@ public class EmployeeCommandServiceImpl implements EmployeeCommandService {
 
   @Autowired private EmployeeRepository employeeRepository;
   @Autowired private EmployeeQueryService employeeService;
-  @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
+  //  @Autowired private BCryptPasswordEncoder passwordEncoder;
 
   @Override
   public Employee insert(Employee employee) {
@@ -49,10 +49,6 @@ public class EmployeeCommandServiceImpl implements EmployeeCommandService {
   }
 
   public Employee fromDTO(EmployeeNewDTO newDTO) {
-    return new Employee(
-        null,
-        newDTO.getName(),
-        newDTO.getEmail(),
-        bCryptPasswordEncoder.encode(newDTO.getPassword()));
+    return new Employee(null, newDTO.getName(), newDTO.getEmail(), newDTO.getPassword());
   }
 }

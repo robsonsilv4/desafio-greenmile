@@ -1,0 +1,3 @@
+jwt:
+  expiration: 3600000
+  secret: DesafioGreenMile

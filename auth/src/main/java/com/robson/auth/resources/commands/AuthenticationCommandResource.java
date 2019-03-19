@@ -1,8 +1,8 @@
-package com.robson.workedhours.resources.commands;
+package com.robson.auth.resources.commands;
 
-import com.robson.workedhours.security.UserSecurityDetails;
-import com.robson.workedhours.filters.utils.JWTUtil;
-import com.robson.workedhours.security.UserService;
+import com.robson.auth.filters.utils.JWTUtil;
+import com.robson.auth.security.UserSecurityDetails;
+import com.robson.auth.security.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

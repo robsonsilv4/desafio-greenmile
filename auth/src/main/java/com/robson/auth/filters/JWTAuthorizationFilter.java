@@ -1,6 +1,6 @@
-package com.robson.workedhours.filters;
+package com.robson.auth.filters;
 
-import com.robson.workedhours.filters.utils.JWTUtil;
+import com.robson.auth.filters.utils.JWTUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -1,4 +1,4 @@
-package com.robson.workedhours.filters;
+package com.robson.auth.filters;
 
 import org.springframework.stereotype.Component;
 

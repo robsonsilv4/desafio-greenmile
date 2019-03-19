@@ -1,4 +1,4 @@
-package com.robson.workedhours.security;
+package com.robson.auth.security;
 
 import com.robson.core.domains.enums.Profile;
 import org.springframework.security.core.GrantedAuthority;

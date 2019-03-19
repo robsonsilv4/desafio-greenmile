@@ -1,4 +1,4 @@
-package com.robson.workedhours.security;
+package com.robson.auth.security;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 

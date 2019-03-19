@@ -1,9 +1,9 @@
-package com.robson.workedhours.filters;
+package com.robson.auth.filters;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.robson.auth.filters.utils.JWTUtil;
 import com.robson.core.dtos.CredentialsDTO;
-import com.robson.workedhours.filters.utils.JWTUtil;
-import com.robson.workedhours.security.UserSecurityDetails;
+import com.robson.auth.security.UserSecurityDetails;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

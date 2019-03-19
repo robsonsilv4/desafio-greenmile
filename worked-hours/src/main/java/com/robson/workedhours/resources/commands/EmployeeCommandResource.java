@@ -8,7 +8,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -49,7 +48,7 @@ public class EmployeeCommandResource {
   }
 
   @DeleteMapping(value = "/{id}")
-  @PreAuthorize("hasAnyRole('ADMIN')")
+  //  @PreAuthorize("hasAnyRole('ADMIN')")
   @ApiOperation(
       value =
           "Remove um usuário (Somente usuários com o perfil 'ADMIN' podem executar esta ação!).")

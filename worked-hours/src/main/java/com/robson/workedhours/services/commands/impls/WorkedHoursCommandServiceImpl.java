@@ -3,8 +3,6 @@ package com.robson.workedhours.services.commands.impls;
 import com.robson.core.domains.Employee;
 import com.robson.core.domains.WorkedHours;
 import com.robson.core.repositories.WorkedHoursRepository;
-import com.robson.workedhours.security.UserSecurityDetails;
-import com.robson.workedhours.security.UserService;
 import com.robson.workedhours.services.commands.WorkedHoursCommandService;
 import com.robson.workedhours.services.queries.EmployeeQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +30,10 @@ public class WorkedHoursCommandServiceImpl implements WorkedHoursCommandService 
     workedHours.setWorkedHours(
         Duration.between(workedHours.getInitialTime(), workedHours.getFinalTime()).toHours());
 
-    UserSecurityDetails user = UserService.authenticated();
-    Employee employee = employeeService.find(user.getId());
-    workedHours.setEmployee(employee);
+    // TODO: 19/03/19 
+    //    UserSecurityDetails user = UserService.authenticated();
+    //    Employee employee = employeeService.find(user.getId());
+    //    workedHours.setEmployee(employee);
 
     return workedHoursRepository.save(workedHours);
   }

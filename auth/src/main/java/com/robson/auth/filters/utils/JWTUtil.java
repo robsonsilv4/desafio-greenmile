@@ -1,4 +1,4 @@
-package com.robson.workedhours.filters.utils;
+package com.robson.auth.filters.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
