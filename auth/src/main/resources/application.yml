@@ -1,3 +1,9 @@
+spring:
+  application:
+    name: auth
+server:
+  port: 8083
+
 jwt:
   expiration: 3600000
   secret: DesafioGreenMile
