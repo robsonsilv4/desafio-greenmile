@@ -7,7 +7,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8081/eureka/
-    fetch-registry: true
     register-with-eureka: true
 
 spring:
@@ -18,12 +17,13 @@ spring:
     password: postgres
     username: postgres
   jpa:
+    show-sql: false
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-    show-sql: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 jwt:
-  expiration: 3600000
-  secret: DesafioGreenMile
+  config:
+type: signed
