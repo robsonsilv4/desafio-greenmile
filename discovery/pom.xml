@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>com.robson</groupId>
-    <artifactId>worked-hours</artifactId>
+    <artifactId>discovery</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>worked-hours</name>
-    <description>Microserviço de Horas Trabalhadas</description>
+    <name>discovery</name>
+    <description>Microserviço de Discovery</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -21,14 +21,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.robson</groupId>
-            <artifactId>core</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>worked-hours</finalName>
+        <finalName>discovery</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -48,4 +47,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

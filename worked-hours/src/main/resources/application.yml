@@ -1,12 +1,18 @@
-jwt:
-  expiration: 3600000
-  secret: DesafioGreenMile
 server:
-  servlet:
-    context-path: /api
+  port: 8082
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
 spring:
   application:
-    name: workedhours
+    name: worked-hours
   datasource:
     url: jdbc:postgresql://localhost:5432/desafio-greenmile
     password: postgres
@@ -17,3 +23,7 @@ spring:
     properties:
       hibernate:
     show-sql: false
+
+jwt:
+  expiration: 3600000
+  secret: DesafioGreenMile
