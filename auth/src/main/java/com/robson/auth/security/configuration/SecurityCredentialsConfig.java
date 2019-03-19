@@ -1,5 +1,6 @@
 package com.robson.auth.security.configuration;
 
+import com.robson.auth.security.filters.JwtUsernameAndPasswordAuthenticationFilter;
 import com.robson.core.configuration.JwtConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
         .authenticationEntryPoint(
             (req, resp, e) -> resp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
         .and()
-        .addFilter(new UsernamePasswordAuthenticationFilter())
+        .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfiguration))
         .authorizeRequests()
         .antMatchers(jwtConfiguration.getLoginUrl())
         .permitAll()

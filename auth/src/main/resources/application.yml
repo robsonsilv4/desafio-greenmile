@@ -12,6 +12,8 @@ eureka:
 spring:
   application:
     name: auth
+  jmx:
+    enabled: false
   datasource:
     url: jdbc:postgresql://localhost:5432/desafio-greenmile
     password: postgres
