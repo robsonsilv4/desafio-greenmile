@@ -1,0 +1,19 @@
+jwt:
+  expiration: 3600000
+  secret: DesafioGreenMile
+server:
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: workedhours
+  datasource:
+    url: jdbc:postgresql://localhost:5432/desafio-greenmile
+    password: postgres
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+    show-sql: false
