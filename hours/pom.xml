@@ -9,10 +9,10 @@
         <relativePath>../</relativePath>
     </parent>
 
-    <artifactId>auth</artifactId>
+    <artifactId>hours</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>auth</name>
-    <description>Microserviço de Autenticação</description>
+    <name>hours</name>
+    <description>Microserviço de Horas Trabalhadas</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -26,14 +26,10 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.1.4.RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -58,5 +54,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

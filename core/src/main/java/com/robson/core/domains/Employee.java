@@ -30,6 +30,7 @@ public class Employee implements Serializable {
 
   private String name;
 
+  @ToString.Exclude
   @Column(unique = true, nullable = false)
   private String email;
 

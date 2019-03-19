@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8082
 
 eureka:
   instance:
@@ -12,7 +12,7 @@ eureka:
 
 spring:
   application:
-    name: auth
+    name: hours
   datasource:
     url: jdbc:postgresql://localhost:5432/desafio-greenmile
     password: postgres
@@ -23,7 +23,3 @@ spring:
     properties:
       hibernate:
     show-sql: false
-
-jwt:
-  expiration: 3600000
-  secret: DesafioGreenMile

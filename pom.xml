@@ -19,7 +19,7 @@
 
     <modules>
         <module>core</module>
-        <module>worked-hours</module>
+        <module>hours</module>
     </modules>
 
     <properties>
@@ -64,6 +64,11 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>7.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
