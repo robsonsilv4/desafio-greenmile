@@ -1,6 +1,6 @@
 package com.robson.desafiogreenmile.security;
 
-import com.robson.desafiogreenmile.domain.enumeration.Profile;
+import com.robson.desafiogreenmile.domains.enums.Profile;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
