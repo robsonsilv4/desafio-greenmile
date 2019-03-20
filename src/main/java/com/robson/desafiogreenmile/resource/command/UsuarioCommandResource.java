@@ -1,9 +1,11 @@
-package com.robson.desafiogreenmile.resource;
+package com.robson.desafiogreenmile.resource.command;
 
 import com.robson.desafiogreenmile.domain.Usuario;
 import com.robson.desafiogreenmile.dto.NovoUsuarioDTO;
 import com.robson.desafiogreenmile.dto.UsuarioDTO;
-import com.robson.desafiogreenmile.service.UsuarioService;
+import com.robson.desafiogreenmile.service.command.UsuarioCommandService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,16 +14,19 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/usuarios")
-public class UsuarioResource {
-
-  @Autowired private UsuarioService usuarioService;
+@Api(
+    value = "Usuários - Comandos",
+    tags = "Usuários - Comandos",
+    description = "Cadastro, alteração e deleção de usuários.")
+public class UsuarioCommandResource {
+  @Autowired private UsuarioCommandService usuarioService;
 
   @PostMapping
+  @ApiOperation(value = "Cadastra um novo usuário.")
   public ResponseEntity<Void> insert(@Valid @RequestBody NovoUsuarioDTO novoUsuarioDTO) {
     Usuario usuario = usuarioService.fromDTO(novoUsuarioDTO);
     usuario = usuarioService.insert(usuario);
@@ -33,13 +38,8 @@ public class UsuarioResource {
     return ResponseEntity.created(uri).build();
   }
 
-  @GetMapping(value = "/{id}")
-  public ResponseEntity<?> find(@PathVariable Long id) {
-    Usuario usuario = usuarioService.find(id);
-    return ResponseEntity.ok().body(usuario);
-  }
-
   @PutMapping(value = "/{id}")
+  @ApiOperation(value = "Atualiza as informações de um usuário existente.")
   public ResponseEntity<Void> update(
       @Valid @RequestBody UsuarioDTO usuarioDTO, @PathVariable Long id) {
     Usuario usuario = usuarioService.fromDTO(usuarioDTO);
@@ -50,17 +50,11 @@ public class UsuarioResource {
 
   @DeleteMapping(value = "/{id}")
   @PreAuthorize("hasAnyRole('ADMIN')")
+  @ApiOperation(
+      value =
+          "Remove um usuário (Somente usuários com o perfil 'ADMIN' podem executar esta ação!).")
   public ResponseEntity<Void> delete(@PathVariable Long id) {
     usuarioService.delete(id);
     return ResponseEntity.noContent().build();
-  }
-
-  @GetMapping
-  @PreAuthorize("hasAnyRole('ADMIN')")
-  public ResponseEntity<List<UsuarioDTO>> findAll() {
-    List<Usuario> list = usuarioService.findAll();
-    List<UsuarioDTO> listDTO =
-        list.stream().map(usuario -> new UsuarioDTO(usuario)).collect(Collectors.toList());
-    return ResponseEntity.ok().body(listDTO);
   }
 }

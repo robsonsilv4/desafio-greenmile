@@ -1,67 +1,81 @@
 package com.robson.desafiogreenmile.resource;
 
-import com.robson.desafiogreenmile.DesafioGreenmileApplicationTests;
-import org.junit.Before;
+import com.jayway.jsonpath.JsonPath;
+import com.robson.desafiogreenmile.repository.UsuarioRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.web.context.WebApplicationContext;
 
+import java.io.UnsupportedEncodingException;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@SpringBootTest
+@AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
-public class UsuarioResourceTest extends DesafioGreenmileApplicationTests {
+public class UsuarioResourceTest {
 
-  private MockMvc mockMvc;
+  @Autowired private MockMvc mockMvc;
+  @Autowired private UsuarioRepository usuarioRepository;
+  @Autowired private WebApplicationContext webApplicationContext;
 
-  @Autowired private UsuarioResource usuarioResource;
+  private ResultActions insertUsuario(String json) throws Exception {
+    return mockMvc.perform(post("/usuarios").contentType(MediaType.APPLICATION_JSON).content(json));
+  }
 
-  @Before
-  public void setUp() {
-    this.mockMvc = MockMvcBuilders.standaloneSetup(usuarioResource).build();
+  private ResultActions login(String json) throws Exception {
+    return mockMvc.perform(post("/login").contentType(MediaType.APPLICATION_JSON).content(json));
+  }
+
+  private String extractToken(MvcResult result) throws UnsupportedEncodingException {
+    return JsonPath.read(result.getResponse().getContentAsString(), "$.token");
   }
 
   @Test
-  public void testFindAll() throws Exception {
-    this.mockMvc
-        .perform(MockMvcRequestBuilders.get("/usuarios"))
-        .andExpect(MockMvcResultMatchers.status().isOk());
+  public void listaUsuarios() throws Exception {
+    mockMvc.perform(get("/usuarios")).andExpect(status().isOk());
   }
 
   @Test
-  public void testFind() throws Exception {
-    this.mockMvc
-        .perform(MockMvcRequestBuilders.get("/usuarios/1"))
-        .andExpect(MockMvcResultMatchers.status().isOk());
-  }
-
-  @Test
-  public void testInsert() throws Exception {
-    this.mockMvc
+  public void realizaCadastro() throws Exception {
+    mockMvc
         .perform(
-            MockMvcRequestBuilders.post("/usuarios")
+            post("/usuarios")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{ \"nome\": \"Samuel\", \"email\": \"samuel@greenmile.com\" }"))
-        .andExpect(MockMvcResultMatchers.status().isCreated());
+                .content(
+                    "{\"nome\":\"Robson\",\"email\":\"robson@greenmile.com\",\"senha\":\"desafio\"}"))
+        .andExpect(status().isCreated());
   }
 
   @Test
-  public void testUpdate() throws Exception {
-    this.mockMvc
+  public void realizaLogin() throws Exception {
+    mockMvc
         .perform(
-            MockMvcRequestBuilders.put("/usuarios/2")
+            post("/login")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{ \"nome\": \"Robson\", \"email\": \"robson@greenmile.com\" }"))
-        .andExpect(MockMvcResultMatchers.status().isNoContent());
+                .content("{\"email\":\"robson@gmail.com\", \"senha\":\"greenmile\"}"))
+        .andExpect(status().isOk())
+        .andReturn();
   }
 
   @Test
-  public void testDelete() throws Exception {
-    this.mockMvc
-        .perform(MockMvcRequestBuilders.delete("/usuarios/1"))
-        .andExpect(MockMvcResultMatchers.status().isNoContent());
+  public void negaLogin() throws Exception {
+    login("{\"email\":\"samuel@greenmile.com\", \"senha\":\"greenmile\"}")
+        .andExpect(status().isUnauthorized());
+  }
+
+  @Test
+  public void negaLoginVazio() throws Exception {
+    login("{}").andExpect(status().isUnauthorized());
   }
 }

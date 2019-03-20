@@ -30,8 +30,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   @Autowired private JWTUtil jwtUtil;
 
-  private static final String[] PUBLIC_MATCHERS_POST = {"/usuarios/**"};
-  private static final String[] PUBLIC_MATCHERS_GET = {"/horas-trabalhadas/**"};
+  private static final String[] PUBLIC_MATCHERS_POST = {"/login/**", "/usuarios/**"};
+  private static final String[] PUBLIC_MATCHERS_GET = {"/usuarios/**", "/horas/**"};
 
   @Override
   public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -45,6 +45,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST)
         .permitAll()
         .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET)
+        .permitAll()
+        .antMatchers(
+            "/v2/api-docs",
+            "/configuration/**",
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/api-docs/**")
         .permitAll()
         .anyRequest()
         .authenticated();

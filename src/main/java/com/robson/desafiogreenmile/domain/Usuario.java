@@ -1,5 +1,6 @@
 package com.robson.desafiogreenmile.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.robson.desafiogreenmile.domain.enumeration.Perfil;
 import lombok.EqualsAndHashCode;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,7 +19,9 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Usuario {
+public class Usuario implements Serializable {
+
+  private static final long serialVersionUID = 6269313493164561869L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +29,7 @@ public class Usuario {
 
   private String nome;
 
-  @Column(unique = true)
+  @Column(unique = true, nullable = false)
   private String email;
 
   @JsonIgnore private String senha;
@@ -34,6 +38,7 @@ public class Usuario {
   @CollectionTable(name = "PERFIS")
   private Set<Integer> perfis = new HashSet<>();
 
+  //  @JsonBackReference
   @JsonIgnore
   @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
   private List<HoraTrabalhada> horasTrabalhadas = new ArrayList<>();
