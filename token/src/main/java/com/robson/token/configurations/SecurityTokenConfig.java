@@ -16,6 +16,10 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
   protected final JwtConfiguration jwtConfiguration;
 
+  private static final String[] PUBLIC_MATCHERS_GET = {"/employees/**", "/hours/**"};
+
+  private static final String[] PUBLIC_MATCHERS_POST = {"/employees/**", "/login/**"};
+
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.csrf()
@@ -39,10 +43,16 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
             "/**/webjars/springfox-swagger-ui/**",
             "/**/v2/api-docs/**")
         .permitAll()
-        .antMatchers("/hours/admin/**")
+        .antMatchers(HttpMethod.DELETE, "/employees/**")
         .hasRole("ADMIN")
-        .antMatchers("/employee/**")
-        .hasAnyRole("ADMIN", "USER")
+        .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET)
+        .permitAll()
+        .antMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST)
+        .permitAll()
+        .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET)
+        .hasAnyRole()
+        .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET)
+        .hasAnyRole()
         .anyRequest()
         .authenticated();
   }

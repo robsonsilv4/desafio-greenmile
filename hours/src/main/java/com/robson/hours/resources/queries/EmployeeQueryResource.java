@@ -27,15 +27,15 @@ public class EmployeeQueryResource {
     return ResponseEntity.ok().body(employee);
   }
 
-  @GetMapping
-  @ApiOperation(value = "Retorna uma lista com todos os usuários.")
-  public ResponseEntity<Page<EmployeeDTO>> findAll(
-      @RequestParam(value = "page", defaultValue = "0") Integer page,
-      @RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
-      @RequestParam(value = "orderBy", defaultValue = "username") String orderBy,
-      @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
-    Page<Employee> list = usuarioService.findAll(page, linesPerPage, orderBy, direction);
-    Page<EmployeeDTO> listDTO = list.map(obj -> new EmployeeDTO(obj));
-    return ResponseEntity.ok().body(listDTO);
-  }
+//  @GetMapping
+//  @ApiOperation(value = "Retorna uma lista com todos os usuários.")
+//  public ResponseEntity<Page<EmployeeDTO>> findAll(
+//      @RequestParam(value = "page", defaultValue = "0") Integer page,
+//      @RequestParam(value = "linesPerPage", defaultValue = "10") Integer linesPerPage,
+//      @RequestParam(value = "orderBy", defaultValue = "username") String orderBy,
+//      @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
+//    Page<Employee> list = usuarioService.findAll(page, linesPerPage, orderBy, direction);
+//    Page<EmployeeDTO> listDTO = list.map(obj -> new EmployeeDTO(obj));
+//    return ResponseEntity.ok().body(listDTO);
+//  }
 }

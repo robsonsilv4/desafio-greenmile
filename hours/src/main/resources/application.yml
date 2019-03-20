@@ -18,7 +18,7 @@ spring:
     username: postgres
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
     show-sql: false

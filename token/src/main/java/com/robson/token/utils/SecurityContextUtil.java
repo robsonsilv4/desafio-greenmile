@@ -24,15 +24,14 @@ public class SecurityContextUtil {
       if (username == null) throw new JOSEException("Username missing from JWT");
 
       List<String> authorities = claims.getStringListClaim("authorities");
-      Employee applicationUser =
+      Employee employee =
           Employee.builder()
               .id(claims.getLongClaim("userId"))
               .username(username)
               .role(String.join(",", authorities))
               .build();
       UsernamePasswordAuthenticationToken auth =
-          new UsernamePasswordAuthenticationToken(
-              applicationUser, null, createAuthories(authorities));
+          new UsernamePasswordAuthenticationToken(employee, null, createAuthories(authorities));
       auth.setDetails(signedJWT.serialize());
 
       SecurityContextHolder.getContext().setAuthentication(auth);

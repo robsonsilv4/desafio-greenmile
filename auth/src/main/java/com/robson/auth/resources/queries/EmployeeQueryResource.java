@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("funcionario")
+@RequestMapping("employee")
 public class EmployeeQueryResource {
 
   @GetMapping(path = "detalhes", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

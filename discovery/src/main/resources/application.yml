@@ -3,12 +3,6 @@ spring:
     name: registry
 server:
   port: 8081
-#  datasource:
-#    driver-class-username: org.h2.Driver
-#    url: jdbc:h2:mem:localhost;DB_CLOSE_ON_EXIT=FALSE
-#    username: admin
-#    password:
-
 
 eureka:
   client:
