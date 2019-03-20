@@ -2,11 +2,14 @@
 
 API de registro de horas trabalhadas desenvolvido durante o desafio da GreenMile - Quixadá.
 
+Há uma versão implementada utilizando microserviços, na branch de [microservices](https://github.com/robsonsilv4/desafio/tree/microservices), onde além da aplicação ter sido divida em serviços, a escrita do código foi padronizada com nomes em inglês e documentação e mensagens em português, baseadas na sugestão do [Filipe Deschamps
+](https://www.youtube.com/watch?v=xWbuHZcS8gA).
+
+Foram realizadas modificações que não estão inclusivas na branch principal, como entre os os commits [4627756](https://github.com/robsonsilv4/desafioGreenMile/commit/462775676fa31b2fa4934caa591eb6ec611601ad) e [630f5ce](https://github.com/robsonsilv4/desafioGreenMile/commit/630f5ce6b688474c614fc428047bbde33f9f31fa).
+
 Confira também a versão deste projeto utilizando CQRS e Event Sourcing no [repositório](https://github.com/robsonsilv4/desafioSpringAxon).
 
-Há também uma versão implementada utilizando microserviços, na branch de [microservices](https://github.com/robsonsilv4/desafio/tree/microservices), onde além da aplicação ter sido divida em serviços, a escrita do código foi padronizada com nomes em inglês e documentação e mensagens em português.
-
-Também foram realizadas modificações que não estão inclusivas na branch principal, como entre os os commits [4627756](https://github.com/robsonsilv4/desafioGreenMile/commit/462775676fa31b2fa4934caa591eb6ec611601ad) e [630f5ce](https://github.com/robsonsilv4/desafioGreenMile/commit/630f5ce6b688474c614fc428047bbde33f9f31fa).
+Ok, agora vamos falar deste projeto...
 
 ## Utilizando a API
 ---
@@ -272,7 +275,7 @@ Este projeto utiliza o guia de estilos para Java do Google ([Google Java Style G
 
 ## Documentação
 
-A documentação gerada pelo Swagger pode ser consultada em: http://localhost:8080/api/v2/api-docs. Também é possivel utilizar a interface web disponibilizada pelo Swagger, para entender como os funcionam os recursos de forma interativa através do endereço: http://localhost:8080/api/swagger-ui.html.
+A documentação gerada pelo Swagger pode ser consultada em [api-docs](http://localhost:8080/api/v2/api-docs). Também é possivel utilizar a interface web disponibilizada pelo Swagger, para entender como os funcionam os recursos de forma interativa através do [endereço](http://localhost:8080/api/swagger-ui.html) ou importação e executando a coleção gerada pelo [Postman](https://www.getpostman.com/collections/7ccc7b4734892b5eaf2a).
 
 ## Desenvolvido com
 
@@ -293,6 +296,11 @@ Utilizando parcialmente o padrão [CQRS](https://martinfowler.com/bliki/CQRS.htm
 ## Autor
 
 * [Robson Silva](https://github.com/robsonsilv4)
+
+## Referências
+
+* https://spring.io/guides/tutorials/rest/
+* https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html
 
 ## Licença
 
