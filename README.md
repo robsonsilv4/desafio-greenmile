@@ -2,14 +2,14 @@
 
 API de registro de horas trabalhadas desenvolvido durante o desafio da GreenMile - Quixadá.
 
-## Começando
+Há também uma versão implementada utilizando microserviços, na branch de [microservices](https://github.com/robsonsilv4/desafio/tree/microservices), onde além da aplicação ter sido divida em serviços, a escrita do código foi padronizada com nomes em inglês e documentação e mensagens em português.
 
-Adicionar descrição e exemplos de uso utilizando o cURL...
+Também foram realizadas modificações que não estão inclusivas na branch principal, como entre os os commits...
 
 ## Utilizando a API
 ---
 
-Adicionar descrição para as requisições...
+Estes são os exemplos de utilização báscia da API, contendo os comandos e as respostas geradas pelos mesmos.
 
 ### Cadastro de usuários
 
@@ -139,7 +139,7 @@ Será retornado as informações relacionadas ao usuário com id equivalente ao 
 
 ### Instalando
 
-É necessário ter o Maven instalado!
+É necessário ter o gerenciador de depências [Maven](https://maven.apache.org/) instalado!
 
 ```sh
 mvn install
@@ -170,6 +170,8 @@ Este projeto utiliza o guia de estilos para Java do Google ([Google Java Style G
 * [H2](http://www.h2database.com/html/main.html)
 * [LOMBOK](https://projectlombok.org/)
 * [SpringFox](http://springfox.github.io/springfox/)
+
+Utilizando parcialmente o padrão [CQRS](https://martinfowler.com/bliki/CQRS.html) (Command Query Responsibility Segregation).
 
 ## Autor
 
