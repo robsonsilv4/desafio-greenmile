@@ -2,6 +2,8 @@
 
 API de registro de horas trabalhadas desenvolvido durante o desafio da GreenMile - Quixadá.
 
+Confira também a versão deste projeto utilizando CQRS e Event Sourcing no [repositório](https://github.com/robsonsilv4/desafioSpringAxon).
+
 Há também uma versão implementada utilizando microserviços, na branch de [microservices](https://github.com/robsonsilv4/desafio/tree/microservices), onde além da aplicação ter sido divida em serviços, a escrita do código foi padronizada com nomes em inglês e documentação e mensagens em português.
 
 Também foram realizadas modificações que não estão inclusivas na branch principal, como entre os os commits [4627756](https://github.com/robsonsilv4/desafioGreenMile/commit/462775676fa31b2fa4934caa591eb6ec611601ad) e [630f5ce](https://github.com/robsonsilv4/desafioGreenMile/commit/630f5ce6b688474c614fc428047bbde33f9f31fa).
